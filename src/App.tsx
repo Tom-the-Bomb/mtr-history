@@ -1,9 +1,11 @@
-import './App.css'
+import InteractiveMap from './components/InteractiveMap'
 
-function App() {
+export default function App() {
     return (
-        <div>1</div>
+        <div className="flex flex-col min-h-dvh min-w-dvw">
+            <header></header>
+            <InteractiveMap />
+            <footer></footer>
+        </div>
     )
 }
-
-export default App

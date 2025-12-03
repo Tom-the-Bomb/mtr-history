@@ -1,0 +1,164 @@
+{
+  "LRT_pathmain_seg1": {
+    "year": 1988,
+    "source": "https://en.wikipedia.org/wiki/Light_Rail_(MTR)",
+    "note": "Assigned Light Rail initial opening year (18 Sep 1988). Verify segment→phase mapping."
+  },
+  "LRT_pathmain_seg2": {
+    "year": 1988,
+    "source": "https://en.wikipedia.org/wiki/Light_Rail_(MTR)",
+    "note": "Assigned Light Rail initial opening year (18 Sep 1988). Verify segment→phase mapping."
+  },
+  "LRT_pathmain_seg3": {
+    "year": 1988,
+    "source": "https://en.wikipedia.org/wiki/Light_Rail_(MTR)",
+    "note": "Assigned Light Rail initial opening year (18 Sep 1988). Verify segment→phase mapping."
+  },
+  "LRT_pathmain_seg4": {
+    "year": 1988,
+    "source": "https://en.wikipedia.org/wiki/Light_Rail_(MTR)",
+    "note": "Assigned Light Rail initial opening year (18 Sep 1988). Verify segment→phase mapping."
+  },
+  "LRT_pathmain_seg5": {
+    "year": 1988,
+    "source": "https://en.wikipedia.org/wiki/Light_Rail_(MTR)",
+    "note": "Assigned Light Rail initial opening year (18 Sep 1988). Verify segment→phase mapping."
+  },
+  "LRT_pathmain_seg6": {
+    "year": 1988,
+    "source": "https://en.wikipedia.org/wiki/Light_Rail_(MTR)",
+    "note": "Assigned Light Rail initial opening year (18 Sep 1988). Verify segment→phase mapping."
+  },
+  "LRT_pathmain_seg7": {
+    "year": 1988,
+    "source": "https://en.wikipedia.org/wiki/Light_Rail_(MTR)",
+    "note": "Assigned Light Rail initial opening year (18 Sep 1988). Verify segment→phase mapping."
+  },
+  "LRT_pathmain_seg8": {
+    "year": 1988,
+    "source": "https://en.wikipedia.org/wiki/Light_Rail_(MTR)",
+    "note": "Assigned Light Rail initial opening year (18 Sep 1988). Verify segment→phase mapping."
+  },
+  "LRT_path2_seg1": {
+    "year": 1988,
+    "source": "https://en.wikipedia.org/wiki/Light_Rail_(MTR)",
+    "note": "Part of Light Rail network; verify."
+  },
+  "LRT_path2_seg2": {
+    "year": 1988,
+    "source": "https://en.wikipedia.org/wiki/Light_Rail_(MTR)",
+    "note": "Part of Light Rail network; verify."
+  },
+  "eastrailmain": {
+    "year": 1910,
+    "source": "https://en.wikipedia.org/wiki/East_Rail_line",
+    "note": "Original Kowloon–Canton Railway opened 1 Oct 1910; many stations and sections added/modernised later. See 'Expansion since the 1990s' and 2022 cross-harbour extension."
+  },
+  "lokmachauspur": {
+    "year": 2007,
+    "source": "https://en.wikipedia.org/wiki/East_Rail_line",
+    "note": "Lok Ma Chau spur / Lok Ma Chau station modern operations – assigned 2007 as an approximate modernisation/usage year; verify exact spur opening date."
+  },
+  "racecoursespur": {
+    "year": 1910,
+    "source": "https://en.wikipedia.org/wiki/East_Rail_line",
+    "note": "Racecourse station historically pre-dates recent expansions; assigned to early East Rail origin (1910) – please verify precise date for the Racecourse spur."
+  },
+  "Tuen_Ma_line": {
+    "year": 2003,
+    "source": "https://en.wikipedia.org/wiki/Tuen_Ma_line",
+    "note": "Tuen Ma is a merged line with phased openings: West Rail (20 Dec 2003), Ma On Shan (2004), Kowloon Southern Link (2009), Phase 1 (14 Feb 2020), full line (27 Jun 2021). Use `phases` for fine-grained mapping.",
+    "phases": [
+      2003,
+      2004,
+      2009,
+      2020,
+      2021
+    ]
+  },
+  "disneyline": {
+    "year": 2005,
+    "source": "https://en.wikipedia.org/wiki/Disneyland_Resort_line",
+    "note": "Penny's Bay rail link opened 1 Aug 2005."
+  },
+  "airportexpress": {
+    "year": 1998,
+    "source": "https://en.wikipedia.org/wiki/Airport_Express_(MTR)",
+    "note": "Airport Express opened 6 Jul 1998; AsiaWorld–Expo extension opened 20 Dec 2005. If this path contains multiple segments, prefer per-segment entries (see airportexpress_seg*)."
+  },
+  "airportexpress_seg1": {
+    "year": 1998,
+    "source": "https://en.wikipedia.org/wiki/Airport_Express_(MTR)",
+    "note": "Main airport express core (1998)."
+  },
+  "airportexpress_seg2": {
+    "year": 1998,
+    "source": "https://en.wikipedia.org/wiki/Airport_Express_(MTR)",
+    "note": "Main airport express core (1998)."
+  },
+  "airportexpress_seg3": {
+    "year": 2005,
+    "source": "https://en.wikipedia.org/wiki/Airport_Express_(MTR)",
+    "note": "AsiaWorld–Expo extension (20 Dec 2005)."
+  },
+  "airportexpress_shared_section_seg1": {
+    "year": 1998,
+    "source": "https://en.wikipedia.org/wiki/Tung_Chung_line",
+    "note": "Shared Lantau corridor (opened 22 Jun 1998)."
+  },
+  "airportexpress_shared_section_seg2": {
+    "year": 1998,
+    "source": "https://en.wikipedia.org/wiki/Tung_Chung_line",
+    "note": "Shared Lantau corridor (opened 22 Jun 1998)."
+  },
+  "airportexpress_shared_section_seg3": {
+    "year": 1998,
+    "source": "https://en.wikipedia.org/wiki/Tung_Chung_line",
+    "note": "Shared Lantau corridor (opened 22 Jun 1998)."
+  },
+  "tungchungline": {
+    "year": 1998,
+    "source": "https://en.wikipedia.org/wiki/Tung_Chung_line",
+    "note": "Tung Chung line opened 22 Jun 1998; Sunny Bay (1 Jun 2005) added for Disneyland link."
+  },
+  "southislandline": {
+    "year": 2016,
+    "source": "https://en.wikipedia.org/wiki/South_Island_line",
+    "note": "South Island line (East) opened 28 Dec 2016."
+  },
+  "tsuenwanline": {
+    "year": 1982,
+    "source": "https://en.wikipedia.org/wiki/Tsuen_Wan_line",
+    "note": "Tsuen Wan line opened May 1982 (mainline)."
+  },
+  "kwuntongline": {
+    "year": 1979,
+    "source": "https://en.wikipedia.org/wiki/Kwun_Tong_line",
+    "note": "Kwun Tong line initial section opened 1 Oct 1979; later extensions in 1989 and 2016 (Whampoa)."
+  },
+  "tseungkwanoline": {
+    "year": 2002,
+    "source": "https://en.wikipedia.org/wiki/Tseung_Kwan_O_line",
+    "note": "Tseung Kwan O line opened 4 Aug 2002; LOHAS Park branch opened 26 Jul 2009."
+  },
+  "lohasparkspur": {
+    "year": 2009,
+    "source": "https://en.wikipedia.org/wiki/Tseung_Kwan_O_line",
+    "note": "LOHAS Park branch opened 26 Jul 2009."
+  },
+  "islandline": {
+    "year": 1985,
+    "source": "https://en.wikipedia.org/wiki/Island_line_(MTR)",
+    "note": "Island Line opened in the mid-1980s (1985); verify specific section dates if needed."
+  },
+  "path1": {
+    "year": null,
+    "source": null,
+    "note": "Decorative/path marker; no assigned year."
+  },
+  "path2": {
+    "year": null,
+    "source": null,
+    "note": "Decorative/path marker; no assigned year."
+  }
+}
