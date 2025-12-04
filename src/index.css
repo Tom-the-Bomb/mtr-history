@@ -1,1 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
 @import "tailwindcss";
+
+@theme {
+    --font-jetbrains-mono: 'JetBrains Mono', monospace;
+}
+
+body {
+    @apply m-0 p-0 overflow-hidden;
+}
+
+* {
+    @apply font-jetbrains-mono;
+}
