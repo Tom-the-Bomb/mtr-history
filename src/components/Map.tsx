@@ -1,5 +1,5 @@
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useMemo } from 'react'
 import * as d3 from 'd3'
 
 import { type LineWrapper, type StationWrapper } from '../schemas'
@@ -15,6 +15,16 @@ export default function Map() {
 
     const [svgLoaded, setSvgLoaded] = useState(false);
     const [time, setTime] = useState<number>(MIN_DATE.getTime());
+
+    const ticks = useMemo(() => {
+        const startYear = MIN_DATE.getFullYear();
+        const endYear = MAX_DATE.getFullYear();
+        const tickDates = [];
+        for (let year = Math.ceil(startYear/ 5) * 5; year < endYear; year += 5) {
+            tickDates.push(new Date(year, 0, 1));
+        }
+        return tickDates;
+    }, []);
 
     useEffect(() => {
         if (!(svgLoaded && svgRef.current)) return;
@@ -125,8 +135,7 @@ export default function Map() {
                 <label htmlFor="date-slider" className="text-lg font-medium">
                     {formatDate(new Date(time))}
                 </label>
-                <div className="w-full flex items-center gap-4">
-                    <span>{formatDate(MIN_DATE, 7)}</span>
+                <div className="relative w-full h-12 flex items-center px-4">
                     <input
                         id="date-slider"
                         type="range"
@@ -134,9 +143,29 @@ export default function Map() {
                         max={MAX_DATE.getTime()}
                         defaultValue={MIN_DATE.getTime()}
                         onChange={(e) => setTime(Number(e.target.value))}
-                        className="grow"
+                        className="absolute left-4 right-4 top-1/2 -translate-y-1/2 z-10 opacity-80 cursor-pointer"
                     />
-                    <span>{formatDate(MAX_DATE, 7)}</span>
+                    <div className="absolute top-1/2 left-4 right-4 h-full -translate-y-1/2 pointer-events-none">
+                        {
+                            ticks.map(date => {
+                                const pct = (
+                                    (date.getTime() - MIN_DATE.getTime())
+                                    / (MAX_DATE.getTime() - MIN_DATE.getTime())
+                                ) * 100;
+
+                                return (
+                                    <div
+                                        key={date.getTime()}
+                                        className="absolute top-1/2 flex flex-col items-center"
+                                        style={{ left: `${pct}%`, transform: `translate(-50%, -50%)` }}
+                                    >
+                                        <div className="h-3 w-0.5 bg-gray-800/50 mt-6"></div>
+                                        <span className="text-[10px] font-medium text-gray-800 mt-0.5">{date.getFullYear()}</span>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
                 </div>
             </footer>
         </div>

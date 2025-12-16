@@ -1,8 +1,8 @@
 
 import { type State } from './schemas';
 
-export const MIN_DATE = new Date(1970, 0, 1);
-export const MAX_DATE = new Date(2025, 0, 1);
+export const MIN_DATE = new Date(1972, 0, 1);
+export const MAX_DATE = new Date(2023, 0, 1);
 
 export function formatDate(date: Date, end: number = 10): string {
     return date.toISOString().slice(0, end).replace(/-/g, '/');
