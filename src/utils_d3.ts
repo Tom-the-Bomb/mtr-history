@@ -99,8 +99,8 @@ export function setupHoverEffect(svgDoc: Document, el: HTMLElement): HTMLElement
     if (el.localName === 'use' && href === '#interchange') {
         const rect = svgDoc.createElementNS('http://www.w3.org/2000/svg', 'rect');
 
-        const useX = parseFloat(el.getAttribute('x') || '0');
-        const useY = parseFloat(el.getAttribute('y') || '0');
+        const useX = parseFloat(el.getAttribute('x')!);
+        const useY = parseFloat(el.getAttribute('y')!);
 
         const width = 6;
         const height = 10;
