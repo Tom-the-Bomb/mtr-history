@@ -1,15 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap');
 
 @import "tailwindcss";
 
 @theme {
-    --font-jetbrains-mono: 'JetBrains Mono', monospace;
+   --font-serif: 'Source Serif 4', serif;
+   --font-sans: 'Plus Jakarta Sans', sans-serif;
+   --font-zh: 'ZCOOL XiaoWei', sans-serif;
 }
 
 body {
     @apply m-0 p-0 overflow-hidden;
 }
 
-* {
-    @apply font-jetbrains-mono;
+.effect-underline {
+    @apply relative inline-block;
+}
+
+.effect-underline:after {
+    @apply content-[''] absolute left-0 inline-block
+    h-4 w-full border-b border-current mt-2 opacity-0 transition-all duration-350 transform
+    scale-x-0 scale-y-100;
+}
+
+.effect-underline:hover:after {
+    @apply opacity-100 scale-100;
 }

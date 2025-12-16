@@ -4,62 +4,9 @@ import * as d3 from 'd3'
 
 import { type LineWrapper, type StationWrapper } from '../schemas'
 import { MAX_DATE, MIN_DATE, formatDate, parseLabelDates } from '../utils'
+import { setupHoverEffect, update } from '../utils_d3'
 
 import mapSvg from '../assets/map.svg'
-
-function update(dateNum: number, lines: LineWrapper[], stations: StationWrapper[]) {
-    const now = new Date(Number(dateNum));
-
-    for (const { el, dateRange: { appear, removed } } of lines) {
-        if (appear <= now && now <= removed) {
-            if (el.style.strokeDashoffset !== '0') {
-                d3.select(el)
-                    .transition()
-                    .duration(500)
-                    .ease(d3.easeLinear)
-                    .style('stroke-dashoffset', '0');
-
-                if (el.id === 'airportexpress_shared_section') {
-                    el.style.strokeDasharray = '6, 6';
-                }
-            }
-        } else {
-            if (el.style.strokeDashoffset == '0') {
-                const length =el.getTotalLength().toString();
-
-                d3.select(el)
-                    .transition()
-                    .duration(500)
-                    .ease(d3.easeLinear)
-                    .style('stroke-dashoffset', length);
-
-                if (el.id === 'airportexpress_shared_section') {
-                    el.style.strokeDasharray = length;
-                }
-            }
-        }
-    }
-
-    for (const { el, states } of stations) {
-        if (states.some(({ dateRange: { appear, removed } }) => appear <= now && now <= removed)) {
-            if (el.style.opacity !== '1') {
-                d3.select(el)
-                    .transition()
-                    .duration(500)
-                    .ease(d3.easeLinear)
-                    .style('opacity', '1')
-            }
-        } else {
-            if (el.style.opacity === '1') {
-                d3.select(el)
-                    .transition()
-                    .duration(500)
-                    .ease(d3.easeLinear)
-                    .style('opacity', '0')
-            }
-        }
-    }
-}
 
 export default function Map() {
     const svgRef = useRef<HTMLObjectElement | null>(null);
@@ -97,7 +44,7 @@ export default function Map() {
                 el.style.opacity = '0';
 
                 return {
-                    el,
+                    el: setupHoverEffect(svgDoc, el),
                     states: parseLabelDates(
                         el.getAttribute('inkscape:label')!
                     )
@@ -155,17 +102,21 @@ export default function Map() {
                     ref={svgRef}
                     data={mapSvg}
                     onLoad={() => setSvgLoaded(true)}
-                    id="map-container"
                     type="image/svg+xml"
                     className="absolute top-0 left-0 w-full h-full"
                 />
             </main>
             <header className={
-                `absolute top-0 left-0 w-screen pt-10 flex flex-col justify-center items-center gap-2 text-center`
+                `absolute top-0 left-0 w-screen pt-15 flex flex-col justify-center items-center gap-3 text-center pointer-events-none`
             }>
-                <h1 className="text-4xl text-shadow-lg">MTR History</h1>
-                <h2 className="text-sm text-shadow-md">Explore the historical development of Hong Kong's MTR system</h2>
-                <h3>Read more</h3>
+                <div>
+                    <h1 className="text-5xl font-bold font-serif text-shadow-xl">MTR History</h1>
+                    <h2 className="text-2xl font-zh">港铁历史</h2>
+                </div>
+                <div>
+                    <h2 className="text-sm text-shadow-xl opacity-70">Explore the historical development of Hong Kong's MTR system</h2>
+                    <h3 className="effect-underline pointer-events-auto">Read more</h3>
+                </div>
             </header>
             <footer className={
                 `absolute bottom-0 left-0 w-screen p-4 pt-2 flex flex-col justify-center items-center gap-2
