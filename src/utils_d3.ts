@@ -70,7 +70,6 @@ export function setupHoverEffect(svgDoc: Document, el: HTMLElement): HTMLElement
             if (['x', 'y', 'xlink:href', 'href'].includes(attr.name)) {
                 continue;
             }
-            console.log(attr.name, attr.value);
             circle.setAttribute(attr.name, attr.value);
         }
         circle.style.fill = '#fff';

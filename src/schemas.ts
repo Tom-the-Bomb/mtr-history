@@ -17,3 +17,9 @@ export interface StationWrapper {
     el: HTMLElement
     states: State[]
 }
+
+export interface RawTooltipData {
+    x: number;
+    y: number;
+    raw: string;
+}

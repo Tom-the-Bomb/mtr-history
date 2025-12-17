@@ -1,13 +1,38 @@
 import { useEffect, useRef, useState, useMemo } from 'react'
 import * as d3 from 'd3'
 
-import { type LineWrapper, type StationWrapper } from '../schemas'
-import { MAX_DATE, MIN_DATE, formatDate, parseLabelDates, playPause } from '../utils'
+import { type LineWrapper, type StationWrapper, type RawTooltipData } from '../schemas'
+import { MAX_DATE, MIN_DATE, formatDate, parseLabelDates, playPause, processStationName } from '../utils'
 import { update, setupHoverEffect } from '../utils_d3'
 
 import mapSvg from '../assets/map.svg'
 import pause from '../assets/pause.svg'
 import play from '../assets/play.svg'
+
+function renderTooltip(
+    tooltip: RawTooltipData | null,
+    time: number
+): React.ReactElement | null {
+    if (!tooltip) return null;
+    const name = processStationName(tooltip.raw, time);
+
+    if (name) {
+        return (
+            <div
+                className="absolute px-3 py-2 bg-gray-900/90 text-white text-sm rounded-md shadow-lg pointer-events-none z-50 whitespace-nowrap backdrop-blur-sm"
+                style={{
+                    left: `${tooltip.x + 10}px`,
+                    top: `${tooltip.y + 10}px`,
+                    transform: 'translate(0, -50%)'
+                }}
+            >
+                {name}
+                <div className="absolute w-2 h-2 bg-gray-900/90 rotate-45 -left-1 top-1/2 -translate-y-1/2"></div>
+            </div>
+        )
+    }
+    return null;
+}
 
 export default function Map() {
     const svgRef = useRef<HTMLObjectElement | null>(null);
@@ -17,6 +42,7 @@ export default function Map() {
     const [svgLoaded, setSvgLoaded] = useState(false);
     const [time, setTime] = useState<number>(MIN_DATE.getTime());
     const [playing, setPlaying] = useState(false);
+    const [tooltip, setTooltip] = useState<RawTooltipData | null>(null);
 
     const ticks = useMemo(() => {
         const startYear = MIN_DATE.getFullYear();
@@ -30,8 +56,8 @@ export default function Map() {
 
     useEffect(() => {
         function handler(e: KeyboardEvent) {
-            e.preventDefault();
             if (e.code === 'Space') {
+                e.preventDefault();
                 playPause(setPlaying, time, setTime);
             }
         }
@@ -67,8 +93,28 @@ export default function Map() {
             .map(el => {
                 el.style.opacity = '0';
 
+                const wrappedEl = setupHoverEffect(svgDoc, el);
+
+                wrappedEl.addEventListener('mouseenter', (e) => {
+                    const rect = svgRef.current!.getBoundingClientRect();
+                    setTooltip({
+                        x: e.clientX - rect.left,
+                        y: e.clientY - rect.top,
+                        raw: el.getAttribute('inkscape:label')!,
+                    });
+                });
+                wrappedEl.addEventListener('mousemove', (e) => {
+                    const rect = svgRef.current!.getBoundingClientRect();
+                    setTooltip(prev => prev ? {
+                        ...prev,
+                        x: e.clientX - rect.left,
+                        y: e.clientY - rect.top
+                    } : null);
+                });
+                wrappedEl.addEventListener('mouseleave', () => setTooltip(null));
+
                 return {
-                    el: setupHoverEffect(svgDoc, el),
+                    el: wrappedEl,
                     states: parseLabelDates(
                         el.getAttribute('inkscape:label')!
                     )
@@ -135,7 +181,7 @@ export default function Map() {
                 }
                 return nextMs;
             });
-        }, 20);
+        }, 40);
         return () => timer.stop();
     }, [playing]);
 
@@ -149,9 +195,10 @@ export default function Map() {
                     type="image/svg+xml"
                     className="absolute top-0 left-0 w-full h-full"
                 />
+                {renderTooltip(tooltip, time)}
             </main>
             <header className={
-                `absolute top-0 left-0 w-screen pt-15 flex flex-col justify-center items-center gap-3 text-center`
+                `absolute top-0 left-0 w-screen pt-15 flex flex-col justify-center items-center gap-3 text-center pointer-events-none`
             }>
                 <div>
                     <h1 className="text-5xl font-bold font-serif text-shadow-xl">MTR History</h1>
@@ -159,7 +206,7 @@ export default function Map() {
                 </div>
                 <div>
                     <h2 className="text-sm text-shadow-xl opacity-70">Explore the historical development of Hong Kong's MTR system</h2>
-                    <h3 className="effect-underline">Read more</h3>
+                    <h3 className="effect-underline pointer-events-auto">Read more</h3>
                 </div>
             </header>
             <footer className={
@@ -169,7 +216,7 @@ export default function Map() {
                 <button
                     type="button"
                     onClick={() => playPause(setPlaying, time, setTime)}
-                    className="absolute left-6 top-6 h-8 flex justify-center items-center rounded"
+                    className="absolute left-6 top-6 h-8 flex justify-center items-center"
                     aria-label={playing ? 'Pause timeline' : 'Play timeline'}
                 >
                     <img src={playing ? pause : play} alt={playing ? 'Pause' : 'Play'} className="h-full"/>

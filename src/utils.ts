@@ -40,3 +40,17 @@ export function parseLabelDates(label: string): State[] {
         };
     });
 }
+
+export function processStationName(stationName: string, time: number): string | null {
+    const states = parseLabelDates(stationName);
+
+    for (const state of states) {
+        if (time >= state.dateRange.appear.getTime() && time <= state.dateRange.removed.getTime()) {
+            return state.name
+                .split('_')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+        }
+    }
+    return null;
+}
