@@ -3,7 +3,7 @@ import * as d3 from 'd3'
 
 import { type LineWrapper, type StationWrapper, type RawTooltipData } from '../schemas'
 import { MAX_DATE, MIN_DATE, formatDate, parseLabelDates, playPause, processStationName } from '../utils'
-import { update, setupHoverEffect } from '../utils_d3'
+import { update, setupHoverEffect, hoverMouseEnter, hoverMouseLeave } from '../utils_d3'
 
 import mtrLogo from '../assets/mtr.svg'
 import mapSvg from '../assets/map.svg'
@@ -11,15 +11,22 @@ import pause from '../assets/pause.svg'
 import play from '../assets/play.svg'
 
 function renderTooltip(
+    stations: StationWrapper[],
     tooltip: RawTooltipData | null,
     time: number
 ): React.ReactElement | null {
-    if (!tooltip) return null;
-    const name = processStationName(tooltip.raw, time);
+    if (!tooltip) {
+        return null;
+    }
+
+    let name = processStationName(tooltip.station, time);
+
+    if (!name && tooltip.station.isRedundant) {
+        const idx = stations.findIndex(station => station === tooltip.station);
+        name = processStationName(stations[idx - 1], time);
+    }
 
     if (name) {
-        tooltip.el.style.pointerEvents = 'auto';
-
         return (
             <div
                 className="absolute px-3 py-2 bg-gray-900/90 text-white text-sm rounded-md shadow-lg pointer-events-none z-50 whitespace-nowrap backdrop-blur-sm"
@@ -36,8 +43,6 @@ function renderTooltip(
                 <div className="absolute w-2 h-2 bg-gray-900/90 rotate-45 -left-1 top-1/2 -translate-y-1/2"></div>
             </div>
         )
-    } else {
-        tooltip.el.style.pointerEvents = 'none';
     }
     return null;
 }
@@ -60,6 +65,15 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
             tickDates.push(new Date(year, 0, 1));
         }
         return tickDates;
+    }, []);
+
+    useEffect(() => {
+        function handler() {
+            window.location.reload();
+        }
+        window.addEventListener('resize', handler);
+
+        return () => window.removeEventListener('resize', handler);
     }, []);
 
     useEffect(() => {
@@ -102,6 +116,13 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
                 el.style.opacity = '0';
 
                 const wrappedEl = setupHoverEffect(svgDoc, el);
+                const label = el.getAttribute('inkscape:label')!;
+
+                const station = {
+                    el: wrappedEl,
+                    isRedundant: label.startsWith('*'),
+                    states: parseLabelDates(label.replace(/^\*/, '')),
+                };
 
                 if (el.localName === 'use') {
                     wrappedEl.addEventListener('mouseenter', (e) => {
@@ -109,8 +130,7 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
                         setTooltip({
                             x: e.clientX - rect.left,
                             y: e.clientY - rect.top,
-                            raw: el.getAttribute('inkscape:label')!,
-                            el: wrappedEl,
+                            station,
                         });
                     });
                     wrappedEl.addEventListener('mousemove', (e) => {
@@ -123,14 +143,29 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
                     });
                     wrappedEl.addEventListener('mouseleave', () => setTooltip(null));
                 }
-
-                return {
-                    el: wrappedEl,
-                    states: parseLabelDates(
-                        el.getAttribute('inkscape:label')!
-                    )
-                };
+                return station;
             });
+
+        for (const station of stationsRef.current) {
+            if (station.isRedundant) {
+                const idx = stationsRef.current.findIndex(st => st === station);
+                const interchange = stationsRef.current[idx - 1];
+
+                const x = parseFloat(interchange.el.getAttribute('x') || '0');
+                const y = parseFloat(interchange.el.getAttribute('y') || '0');
+                const width = parseFloat(interchange.el.getAttribute('width') || '0');
+                const height = parseFloat(interchange.el.getAttribute('height') || '0');
+                const rx = parseFloat(interchange.el.getAttribute('rx') || '0');
+
+                d3.select(station.el)
+                    .on('mouseenter.b', () => {
+                        hoverMouseEnter(interchange.el, x, y, width, height, rx, 5 / 3);
+                    })
+                    .on('mouseleave.b', () => {
+                        hoverMouseLeave(interchange.el, x, y, width, height, rx);
+                    });
+            }
+        }
 
         update(time, linesRef.current, stationsRef.current);
 
@@ -206,7 +241,7 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
                     type="image/svg+xml"
                     className="absolute top-0 left-0 w-full h-full"
                 />
-                {renderTooltip(tooltip, time)}
+                {renderTooltip(stationsRef.current, tooltip, time)}
             </main>
             <header className={
                 `absolute top-0 left-0 w-screen pt-15 flex flex-col justify-center items-center gap-3 text-center pointer-events-none`

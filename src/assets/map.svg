@@ -25,15 +25,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="25.757193"
-     inkscape:cx="1104.2935"
-     inkscape:cy="1118.6972"
+     inkscape:zoom="1.1383179"
+     inkscape:cx="1095.9153"
+     inkscape:cy="866.62965"
      inkscape:window-width="2256"
      inkscape:window-height="1398"
      inkscape:window-x="-11"
      inkscape:window-y="-11"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer3" />
+     inkscape:current-layer="zoom-layer" />
   <title
      id="title1">MTR system map in English released to the public domain</title>
   <style
@@ -519,7 +519,7 @@
          y="497"
          xlink:href="#station"
          id="use13-7"
-         inkscape:label="tai_wai=1983_08_15-2004_12_21"
+         inkscape:label="*tai_wai=1983_08_15-2004_12_21"
          style="display:inline;stroke-width:0.5;stroke-dasharray:none"
          transform="translate(-26.074252,31.087402)" />
       <use
@@ -535,7 +535,7 @@
          y="673"
          xlink:href="#station"
          id="use16-0"
-         inkscape:label="kowloon_tong=1979_10_01-1982_05_04"
+         inkscape:label="*kowloon_tong=1979_10_01-1982_05_04"
          style="display:inline;stroke-width:0.5;stroke-dasharray:none"
          transform="translate(12.222632,-44.036669)" />
       <use
@@ -556,7 +556,7 @@
          y="720.5"
          xlink:href="#station"
          id="use49-4"
-         inkscape:label="hung_hom=1910_10_01-1921_09_15,kowloon=1975_11_30-1996_02_01,hung_hom=1996_02_01-2009_08_16"
+         inkscape:label="*hung_hom=1910_10_01-1921_09_15,kowloon=1975_11_30-1996_02_01,hung_hom=1996_02_01-2009_08_16"
          style="display:inline;stroke-width:0.5;stroke-dasharray:none"
          transform="translate(-23.222357,5.189928)" />
       <use
@@ -670,7 +670,7 @@
          y="539"
          xlink:href="#station"
          id="use24-1"
-         inkscape:label="lai_wan=1982_05_17-1985_05_31,mei_foo=1985_05_31-2004_10_24"
+         inkscape:label="*lai_wan=1982_05_17-1985_05_31,mei_foo=1985_05_31-2004_10_24"
          style="display:inline;stroke-width:0.5;stroke-dasharray:none" />
       <use
          transform="translate(-4)"
@@ -845,7 +845,7 @@
          y="644"
          xlink:href="#station"
          id="use54-7"
-         inkscape:label="argyle=1979_12_31-1982_04_26"
+         inkscape:label="*argyle=1979_12_31-1982_04_26"
          style="display:inline;stroke-width:0.5;stroke-dasharray:none"
          transform="translate(2.828681,36.765733)" />
       <use
@@ -859,7 +859,7 @@
          y="644"
          xlink:href="#station"
          id="use54-9"
-         inkscape:label="waterloo=1979_12_22-1982_04_26"
+         inkscape:label="*waterloo=1979_12_22-1982_04_26"
          style="display:inline;stroke-width:0.5;stroke-dasharray:none"
          transform="translate(5.922553,53.770798)" />
       <use
@@ -874,7 +874,7 @@
          y="720.5"
          xlink:href="#station"
          id="use49-45"
-         inkscape:label="ho_man_tin=2016_10_23-2021_07_27"
+         inkscape:label="*ho_man_tin=2016_10_23-2021_07_27"
          style="display:inline;stroke-width:0.5;stroke-dasharray:none"
          transform="translate(-19.896824,-14.495073)" />
       <use
@@ -909,7 +909,7 @@
          y="744"
          xlink:href="#station"
          id="use51-5"
-         inkscape:label="admiralty=1980_02_12-1985_05_31"
+         inkscape:label="*admiralty=1980_02_12-1985_05_31"
          style="display:inline;stroke-width:0.5;stroke-dasharray:none"
          transform="translate(-20.649422,48.644559)" />
       <use
@@ -925,7 +925,7 @@
          y="744"
          xlink:href="#station"
          id="use51-5-2"
-         inkscape:label="chater=1980_02_12-1985_05_31,central=1985_05_31-1986_05_23"
+         inkscape:label="*chater=1980_02_12-1985_05_31,central=1985_05_31-1986_05_23"
          style="display:inline;stroke-width:0.5;stroke-dasharray:none"
          transform="translate(-36.792476,43.312715)" />
       <use
@@ -960,7 +960,7 @@
          y="628"
          xlink:href="#station"
          id="use57-1"
-         inkscape:label="diamond_hill=1979_10_01-2020_02_14"
+         inkscape:label="*diamond_hill=1979_10_01-2020_02_14"
          style="display:inline;stroke-width:0.5;stroke-dasharray:none"
          transform="translate(-19.807324,-11.388405)" />
       <use
@@ -1106,7 +1106,7 @@
          y="769"
          xlink:href="#station"
          id="use75-7"
-         inkscape:label="north_point=1985_05_31-2001_09_27"
+         inkscape:label="*north_point=1985_05_31-2001_09_27"
          style="display:inline;stroke-width:0.5;stroke-dasharray:none"
          transform="translate(18.968527,-9.8175963)" />
       <use
@@ -1120,7 +1120,7 @@
          y="780"
          xlink:href="#station"
          id="use78-1"
-         inkscape:label="quarry_bay=1985_05_31-1989_10_01"
+         inkscape:label="*quarry_bay=1985_05_31-1989_10_01"
          style="display:inline;stroke-width:0.5;stroke-dasharray:none"
          transform="translate(-15.776203,-10.534072)" />
       <use
@@ -1171,7 +1171,7 @@
          y="572.5"
          xlink:href="#station"
          id="use42-2"
-         inkscape:label="lai_king=1982_05_10-1998_06_22"
+         inkscape:label="*lai_king=1982_05_10-1998_06_22"
          style="display:inline;stroke-width:0.5;stroke-dasharray:none"
          transform="translate(-1.2597356,23.281895)" />
       <use
@@ -1187,7 +1187,7 @@
          y="572.5"
          xlink:href="#station"
          id="use42-2-7"
-         inkscape:label="nam_cheong=2003_12_16-2004_10_24"
+         inkscape:label="*nam_cheong=2003_12_16-2004_10_24"
          style="display:inline;stroke-width:0.5;stroke-dasharray:none"
          transform="translate(68.541096,85.5022)" />
       <use

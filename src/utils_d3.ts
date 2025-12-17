@@ -56,6 +56,37 @@ export function update(dateNum: number, lines: LineWrapper[], stations: StationW
     }
 }
 
+export function hoverMouseEnter(
+    rect: Element,
+    currentX: number, currentY: number,
+    width: number, height: number,
+    rx: number, scaleFactor: number
+): void {
+    d3.select(rect)
+        .transition('hoverEffect')
+        .duration(300)
+        .attr('x', String(currentX - (width * scaleFactor - width) / 2))
+        .attr('y', String(currentY - (height * scaleFactor - height) / 2))
+        .attr('width', String(width * scaleFactor))
+        .attr('height', String(height * scaleFactor))
+        .attr('rx', String(rx * scaleFactor));
+}
+
+export function hoverMouseLeave(rect: Element,
+    currentX: number, currentY: number,
+    width: number, height: number,
+    rx: number
+): void {
+    d3.select(rect)
+        .transition('hoverEffect')
+        .duration(300)
+        .attr('x', String(currentX))
+        .attr('y', String(currentY))
+        .attr('width', String(width))
+        .attr('height', String(height))
+        .attr('rx', String(rx));
+}
+
 export function setupHoverEffect(svgDoc: Document, el: HTMLElement): HTMLElement {
     const href = el.getAttribute('xlink:href');
 
@@ -79,13 +110,13 @@ export function setupHoverEffect(svgDoc: Document, el: HTMLElement): HTMLElement
         el.parentNode!.replaceChild(circle, el);
 
         d3.select(circle)
-            .on('mouseenter', () => {
+            .on('mouseenter.a', () => {
                 d3.select(circle)
                     .transition('hoverEffect')
                     .duration(300)
                     .attr('r', '5');
             })
-            .on('mouseleave', () => {
+            .on('mouseleave.a', () => {
                 d3.select(circle)
                     .transition('hoverEffect')
                     .duration(300)
@@ -131,26 +162,8 @@ export function setupHoverEffect(svgDoc: Document, el: HTMLElement): HTMLElement
         const scaleFactor = 5 / 3;
 
         d3.select(rect)
-            .on('mouseenter', () => {
-                d3.select(rect)
-                    .transition('hoverEffect')
-                    .duration(300)
-                    .attr('x', String(currentX - (width * scaleFactor - width) / 2))
-                    .attr('y', String(currentY - (height * scaleFactor - height) / 2))
-                    .attr('width', String(width * scaleFactor))
-                    .attr('height', String(height * scaleFactor))
-                    .attr('rx', String(rx * scaleFactor));
-            })
-            .on('mouseleave', () => {
-                d3.select(rect)
-                    .transition('hoverEffect')
-                    .duration(300)
-                    .attr('x', String(currentX))
-                    .attr('y', String(currentY))
-                    .attr('width', String(width))
-                    .attr('height', String(height))
-                    .attr('rx', String(rx));
-            });
+            .on('mouseenter', () => hoverMouseEnter(rect as Element, currentX, currentY, width, height, rx, scaleFactor))
+            .on('mouseleave', () => hoverMouseLeave(rect as Element, currentX, currentY, width, height, rx));
 
         return rect as unknown as HTMLElement;
     }

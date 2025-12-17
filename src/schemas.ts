@@ -15,12 +15,12 @@ export interface State {
 
 export interface StationWrapper {
     el: HTMLElement
+    isRedundant: boolean
     states: State[]
 }
 
 export interface RawTooltipData {
-    x: number;
-    y: number;
-    raw: string;
-    el: HTMLElement;
+    x: number
+    y: number
+    station: StationWrapper
 }

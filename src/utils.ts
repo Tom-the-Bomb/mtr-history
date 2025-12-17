@@ -1,5 +1,5 @@
 
-import { type State } from './schemas';
+import { type State, type StationWrapper } from './schemas';
 
 export const MIN_DATE = new Date(1972, 0, 1);
 export const MAX_DATE = new Date(2023, 0, 1);
@@ -41,10 +41,8 @@ export function parseLabelDates(label: string): State[] {
     });
 }
 
-export function processStationName(stationName: string, time: number): string | null {
-    const states = parseLabelDates(stationName);
-
-    for (const state of states) {
+export function processStationName(station: StationWrapper, time: number): string | null {
+    for (const state of station.states) {
         if (time >= state.dateRange.appear.getTime() && time <= state.dateRange.removed.getTime()) {
             return state.name
                 .split('_')
