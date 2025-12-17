@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useMemo } from 'react'
 import * as d3 from 'd3'
 
 import { type LineWrapper, type StationWrapper } from '../schemas'
-import { MAX_DATE, MIN_DATE, formatDate, parseLabelDates } from '../utils'
+import { MAX_DATE, MIN_DATE, formatDate, parseLabelDates, playPause } from '../utils'
 import { update, setupHoverEffect } from '../utils_d3'
 
 import mapSvg from '../assets/map.svg'
@@ -26,6 +26,18 @@ export default function Map() {
             tickDates.push(new Date(year, 0, 1));
         }
         return tickDates;
+    }, []);
+
+    useEffect(() => {
+        function handler(e: KeyboardEvent) {
+            e.preventDefault();
+            if (e.code === 'Space') {
+                playPause(setPlaying, time, setTime);
+            }
+        }
+        document.addEventListener('keydown', handler);
+
+        return () => document.removeEventListener('keydown', handler);
     }, []);
 
     useEffect(() => {
@@ -156,13 +168,7 @@ export default function Map() {
             }>
                 <button
                     type="button"
-                    onClick={() => setPlaying(playing => {
-                        const next = !playing;
-                        if (next && time >= MAX_DATE.getTime()) {
-                            setTime(MIN_DATE.getTime());
-                        }
-                        return next;
-                    })}
+                    onClick={() => playPause(setPlaying, time, setTime)}
                     className="absolute left-6 top-6 h-8 flex justify-center items-center rounded"
                     aria-label={playing ? 'Pause timeline' : 'Play timeline'}
                 >
