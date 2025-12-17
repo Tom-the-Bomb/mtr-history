@@ -5,6 +5,7 @@ import { type LineWrapper, type StationWrapper, type RawTooltipData } from '../s
 import { MAX_DATE, MIN_DATE, formatDate, parseLabelDates, playPause, processStationName } from '../utils'
 import { update, setupHoverEffect } from '../utils_d3'
 
+import mtrLogo from '../assets/mtr.svg'
 import mapSvg from '../assets/map.svg'
 import pause from '../assets/pause.svg'
 import play from '../assets/play.svg'
@@ -26,7 +27,10 @@ function renderTooltip(
                     transform: 'translate(0, -50%)'
                 }}
             >
-                {name}
+                <div className="flex gap-2 items-center">
+                    <img src={mtrLogo} alt="" className="h-4"/>
+                    {name}
+                </div>
                 <div className="absolute w-2 h-2 bg-gray-900/90 rotate-45 -left-1 top-1/2 -translate-y-1/2"></div>
             </div>
         )
@@ -34,7 +38,7 @@ function renderTooltip(
     return null;
 }
 
-export default function Map() {
+export default function Map({ setRenderArticle }: { setRenderArticle: (value: boolean) => void }) {
     const svgRef = useRef<HTMLObjectElement | null>(null);
     const linesRef = useRef<LineWrapper[]>([]);
     const stationsRef = useRef<StationWrapper[]>([]);
@@ -186,7 +190,7 @@ export default function Map() {
     }, [playing]);
 
     return (
-        <div className="">
+        <>
             <main className="w-screen h-screen">
                 <object
                     ref={svgRef}
@@ -204,9 +208,15 @@ export default function Map() {
                     <h1 className="text-5xl font-bold font-serif text-shadow-xl">MTR History</h1>
                     <h2 className="text-2xl font-zh">港铁历史</h2>
                 </div>
-                <div>
+                <div className="flex flex-col gap-5 justify-center items-center">
                     <h2 className="text-sm text-shadow-xl opacity-70">Explore the historical development of Hong Kong's MTR system</h2>
-                    <h3 className="effect-underline pointer-events-auto">Read more</h3>
+                    <button
+                        type="button"
+                        className="pointer-events-auto nav-btn"
+                        onClick={() => setRenderArticle(true)}
+                    >
+                        Read more
+                    </button>
                 </div>
             </header>
             <footer className={
@@ -260,6 +270,6 @@ export default function Map() {
                     </div>
                 </div>
             </footer>
-        </div>
+        </>
     )
 }
