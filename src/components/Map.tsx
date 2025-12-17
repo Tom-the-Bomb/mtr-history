@@ -1,12 +1,13 @@
-
 import { useEffect, useRef, useState, useMemo } from 'react'
 import * as d3 from 'd3'
 
 import { type LineWrapper, type StationWrapper } from '../schemas'
 import { MAX_DATE, MIN_DATE, formatDate, parseLabelDates } from '../utils'
+import { update, setupHoverEffect } from '../utils_d3'
 
 import mapSvg from '../assets/map.svg'
-import { update, setupHoverEffect } from '../utils_d3'
+import pause from '../assets/pause.svg'
+import play from '../assets/play.svg'
 
 export default function Map() {
     const svgRef = useRef<HTMLObjectElement | null>(null);
@@ -15,6 +16,7 @@ export default function Map() {
 
     const [svgLoaded, setSvgLoaded] = useState(false);
     const [time, setTime] = useState<number>(MIN_DATE.getTime());
+    const [playing, setPlaying] = useState(false);
 
     const ticks = useMemo(() => {
         const startYear = MIN_DATE.getFullYear();
@@ -105,6 +107,26 @@ export default function Map() {
         update(time, linesRef.current, stationsRef.current);
     }, [time]);
 
+    useEffect(() => {
+        if (!playing) {
+            return;
+        }
+
+        const timer = d3.interval(() => {
+            setTime(prev => {
+                const nextDate = d3.timeMonth.offset(new Date(prev), 1);
+                const nextMs = nextDate.getTime();
+
+                if (nextMs >= MAX_DATE.getTime()) {
+                    setPlaying(false);
+                    return MAX_DATE.getTime();
+                }
+                return nextMs;
+            });
+        }, 20);
+        return () => timer.stop();
+    }, [playing]);
+
     return (
         <div className="">
             <main className="w-screen h-screen">
@@ -132,7 +154,24 @@ export default function Map() {
                 `absolute bottom-0 left-0 w-screen p-4 pt-2 flex flex-col justify-center items-center gap-2
                 bg-gray-400/50`
             }>
-                <label htmlFor="date-slider" className="text-lg font-medium">
+                <button
+                    type="button"
+                    onClick={() => setPlaying(playing => {
+                        const next = !playing;
+                        if (next && time >= MAX_DATE.getTime()) {
+                            setTime(MIN_DATE.getTime());
+                        }
+                        return next;
+                    })}
+                    className="absolute left-6 top-6 h-8 flex justify-center items-center rounded"
+                    aria-label={playing ? 'Pause timeline' : 'Play timeline'}
+                >
+                    <img src={playing ? pause : play} alt={playing ? 'Pause' : 'Play'} className="h-full"/>
+                </button>
+                <label
+                    htmlFor="date-slider"
+                    className="inline-block text-lg font-medium"
+                >
                     {formatDate(new Date(time))}
                 </label>
                 <div className="relative w-full h-12 flex items-center px-4">
@@ -141,7 +180,7 @@ export default function Map() {
                         type="range"
                         min={MIN_DATE.getTime()}
                         max={MAX_DATE.getTime()}
-                        defaultValue={MIN_DATE.getTime()}
+                        value={time}
                         onChange={(e) => setTime(Number(e.target.value))}
                         className="absolute left-4 right-4 top-1/2 -translate-y-1/2 z-10 opacity-80 cursor-pointer"
                     />

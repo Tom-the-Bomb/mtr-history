@@ -80,14 +80,14 @@ export function setupHoverEffect(svgDoc: Document, el: HTMLElement): HTMLElement
         el.parentNode!.replaceChild(circle, el);
 
         d3.select(circle)
-            .on('mouseenter', function () {
-                d3.select(this)
+            .on('mouseenter', () => {
+                d3.select(circle)
                     .transition('hoverEffect')
                     .duration(300)
                     .attr('r', '5');
             })
-            .on('mouseleave', function () {
-                d3.select(this)
+            .on('mouseleave', () => {
+                d3.select(circle)
                     .transition('hoverEffect')
                     .duration(300)
                     .attr('r', '3');
@@ -132,8 +132,8 @@ export function setupHoverEffect(svgDoc: Document, el: HTMLElement): HTMLElement
         const scaleFactor = 5 / 3;
 
         d3.select(rect)
-            .on('mouseenter', function () {
-                d3.select(this)
+            .on('mouseenter', () => {
+                d3.select(rect)
                     .transition('hoverEffect')
                     .duration(300)
                     .attr('x', String(currentX - (width * scaleFactor - width) / 2))
@@ -142,8 +142,8 @@ export function setupHoverEffect(svgDoc: Document, el: HTMLElement): HTMLElement
                     .attr('height', String(height * scaleFactor))
                     .attr('rx', String(rx * scaleFactor));
             })
-            .on('mouseleave', function () {
-                d3.select(this)
+            .on('mouseleave', () => {
+                d3.select(rect)
                     .transition('hoverEffect')
                     .duration(300)
                     .attr('x', String(currentX))
