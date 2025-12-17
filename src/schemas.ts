@@ -22,4 +22,5 @@ export interface RawTooltipData {
     x: number;
     y: number;
     raw: string;
+    el: HTMLElement;
 }

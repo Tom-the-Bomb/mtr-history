@@ -25,9 +25,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="2.2766357"
-     inkscape:cx="1172.5635"
-     inkscape:cy="872.9987"
+     inkscape:zoom="25.757193"
+     inkscape:cx="1104.2935"
+     inkscape:cy="1118.6972"
      inkscape:window-width="2256"
      inkscape:window-height="1398"
      inkscape:window-x="-11"
@@ -337,7 +337,7 @@
          id="path598"
          style="display:inline;fill:none;stroke-width:1.5;stroke-dasharray:none"
          class="kt line"
-         inkscape:label="kwun_tong_line=1989_10_1-2002_08_04"
+         inkscape:label="kwun_tong_line=1989_10_01-2002_08_04"
          d="m 887.38653,700.59815 c 0.20105,0.12931 0.40546,0.26318 0.61347,0.40185 0.47188,0.31459 0.99324,0.65391 1.54852,1.01409 m 0,0 c 2.97493,1.92967 6.92336,4.45779 9.45148,6.98591 3,2 2,4 5.5,6.5 1.75078,1.75078 7.11278,8.12716 6.71992,12.94814 -0.17846,2.1899 -0.78857,2.57791 -2.98413,4.06562 -18.60585,12.60711 -51.28946,28.63136 -57.25562,33.98777 -2.61615,1.93587 -8.79521,1.54679 -8.71336,4.64342"
          sodipodi:nodetypes="csccccsscc" />
       <path
@@ -411,7 +411,7 @@
          stroke="#000000"
          stroke-width="1"
          id="path624"
-         inkscape:label="hong_kong_central=1996_06_22"
+         inkscape:label="hong_kong_central=1998_06_22"
          style="display:inline;stroke-width:0.5;stroke-dasharray:none"
          sodipodi:nodetypes="cc" />
       <use
@@ -512,16 +512,32 @@
          transform="rotate(130,254.16164,440.53114)"
          xlink:href="#interchange"
          id="use14"
-         inkscape:label="tai_wai=1983_08_15"
+         inkscape:label="tai_wai=2004_12_21"
          style="stroke-width:0.5;stroke-dasharray:none" />
+      <use
+         x="780"
+         y="497"
+         xlink:href="#station"
+         id="use13-7"
+         inkscape:label="tai_wai=1983_08_15-2004_12_21"
+         style="display:inline;stroke-width:0.5;stroke-dasharray:none"
+         transform="translate(-26.074252,31.087402)" />
       <use
          x="756"
          y="622"
          xlink:href="#interchange"
          transform="rotate(90,751.5,624.5)"
          id="use15"
-         inkscape:label="kowloon_tong=1979_10_01"
+         inkscape:label="kowloon_tong=1982_05_04"
          style="stroke-width:0.5;stroke-dasharray:none" />
+      <use
+         x="745"
+         y="673"
+         xlink:href="#station"
+         id="use16-0"
+         inkscape:label="kowloon_tong=1979_10_01-1982_05_04"
+         style="display:inline;stroke-width:0.5;stroke-dasharray:none"
+         transform="translate(12.222632,-44.036669)" />
       <use
          x="745"
          y="673"
@@ -533,8 +549,16 @@
          transform="rotate(90,19.883633,745.5305)"
          xlink:href="#interchange"
          id="HungHom"
-         inkscape:label="hung_hom=1910_10_01-1921_09_15,kowloon=1975_11_30-1996_02_01,hung_hom=1996_02_01"
+         inkscape:label="hung_hom=2009_08_16"
          style="stroke-width:0.5;stroke-dasharray:none" />
+      <use
+         x="790"
+         y="720.5"
+         xlink:href="#station"
+         id="use49-4"
+         inkscape:label="hung_hom=1910_10_01-1921_09_15,kowloon=1975_11_30-1996_02_01,hung_hom=1996_02_01-2009_08_16"
+         style="display:inline;stroke-width:0.5;stroke-dasharray:none"
+         transform="translate(-23.222357,5.189928)" />
       <use
          x="749"
          y="748"
@@ -597,7 +621,8 @@
          xlink:href="#station"
          id="CheKungTemple"
          inkscape:label="che_kung_temple=2004_12_21"
-         style="stroke-width:0.5;stroke-dasharray:none" />
+         style="stroke-width:0.5;stroke-dasharray:none"
+         transform="translate(0.31059285,0.2070619)" />
       <use
          x="740.20001"
          y="548.20001"
@@ -637,8 +662,16 @@
          transform="rotate(-103.37986,571.30641,56.748801)"
          xlink:href="#interchange"
          id="use23"
-         inkscape:label="lai_wan=1982_05_17-1985_05_31,mei_foo=1985_05_31"
+         inkscape:label="mei_foo=2004_10_24"
          style="stroke-width:0.5;stroke-dasharray:none" />
+      <use
+         transform="translate(70.878853,86.317807)"
+         x="579"
+         y="539"
+         xlink:href="#station"
+         id="use24-1"
+         inkscape:label="lai_wan=1982_05_17-1985_05_31,mei_foo=1985_05_31-2004_10_24"
+         style="display:inline;stroke-width:0.5;stroke-dasharray:none" />
       <use
          transform="translate(-4)"
          x="579"
@@ -805,21 +838,45 @@
          transform="rotate(85,-4.5905319,741.01023)"
          xlink:href="#interchange"
          id="use47"
-         inkscape:label="argyle=1979_12_31-1985_05_31,mong_kok=1985_05_31"
+         inkscape:label="argyle=1982_04_26-1985_05_31,mong_kok=1985_05_31"
          style="stroke-width:0.5;stroke-dasharray:none" />
+      <use
+         x="733"
+         y="644"
+         xlink:href="#station"
+         id="use54-7"
+         inkscape:label="argyle=1979_12_31-1982_04_26"
+         style="display:inline;stroke-width:0.5;stroke-dasharray:none"
+         transform="translate(2.828681,36.765733)" />
       <use
          transform="rotate(85,-12.366654,751.14719)"
          xlink:href="#interchange"
          id="use48"
-         inkscape:label="waterloo=1979_12_22-1985_05_31,yau_ma_tei=1985_05_31"
+         inkscape:label="waterloo=1982_04_26-1985_05_31,yau_ma_tei=1985_05_31"
          style="stroke-width:0.5;stroke-dasharray:none" />
+      <use
+         x="733"
+         y="644"
+         xlink:href="#station"
+         id="use54-9"
+         inkscape:label="waterloo=1979_12_22-1982_04_26"
+         style="display:inline;stroke-width:0.5;stroke-dasharray:none"
+         transform="translate(5.922553,53.770798)" />
       <use
          x="770"
          y="704"
          xlink:href="#interchange"
          id="HoManTin"
-         inkscape:label="ho_man_tin=2016_10_23"
+         inkscape:label="ho_man_tin=2021_07_27"
          style="stroke-width:0.5;stroke-dasharray:none" />
+      <use
+         x="790"
+         y="720.5"
+         xlink:href="#station"
+         id="use49-45"
+         inkscape:label="ho_man_tin=2016_10_23-2021_07_27"
+         style="display:inline;stroke-width:0.5;stroke-dasharray:none"
+         transform="translate(-19.896824,-14.495073)" />
       <use
          x="790"
          y="720.5"
@@ -845,16 +902,32 @@
          transform="rotate(10.000001,-4179.2344,4524.0627)"
          xlink:href="#interchange"
          id="use52"
-         inkscape:label="admiralty=1980_02_12"
+         inkscape:label="admiralty=1985_05_31"
          style="stroke-width:0.5;stroke-dasharray:none" />
+      <use
+         x="743"
+         y="744"
+         xlink:href="#station"
+         id="use51-5"
+         inkscape:label="admiralty=1980_02_12-1985_05_31"
+         style="display:inline;stroke-width:0.5;stroke-dasharray:none"
+         transform="translate(-20.649422,48.644559)" />
       <use
          xlink:href="#interchange"
          x="705"
          y="789"
          transform="rotate(39.999999,704.99993,789.00002)"
          id="use53"
-         inkscape:label="chater=1980_02_12-1985_05_31,central=1985_05_31"
+         inkscape:label="central=1986_05_23"
          style="stroke-width:0.5;stroke-dasharray:none" />
+      <use
+         x="743"
+         y="744"
+         xlink:href="#station"
+         id="use51-5-2"
+         inkscape:label="chater=1980_02_12-1985_05_31,central=1985_05_31-1986_05_23"
+         style="display:inline;stroke-width:0.5;stroke-dasharray:none"
+         transform="translate(-36.792476,43.312715)" />
       <use
          x="733"
          y="644"
@@ -880,8 +953,16 @@
          transform="rotate(34.999999,-570.60867,1607.8538)"
          xlink:href="#interchange"
          id="DiamondHill"
-         inkscape:label="diamond_hill=1979_10_01"
+         inkscape:label="diamond_hill=2020_02_14"
          style="stroke-width:0.5;stroke-dasharray:none" />
+      <use
+         x="840"
+         y="628"
+         xlink:href="#station"
+         id="use57-1"
+         inkscape:label="diamond_hill=1979_10_01-2020_02_14"
+         style="display:inline;stroke-width:0.5;stroke-dasharray:none"
+         transform="translate(-19.807324,-11.388405)" />
       <use
          x="840"
          y="628"
@@ -1018,14 +1099,30 @@
          transform="rotate(-2.6400421,16912.39,-17434.448)"
          xlink:href="#interchange"
          id="use76"
-         inkscape:label="north_point=1985_05_31"
-         style="stroke-width:0.5;stroke-dasharray:none" />
+         inkscape:label="north_point=2001_09_27"
+         style="display:inline;stroke-width:0.5;stroke-dasharray:none" />
+      <use
+         x="802"
+         y="769"
+         xlink:href="#station"
+         id="use75-7"
+         inkscape:label="north_point=1985_05_31-2001_09_27"
+         style="display:inline;stroke-width:0.5;stroke-dasharray:none"
+         transform="translate(18.968527,-9.8175963)" />
       <use
          transform="rotate(12.473903,-3097.2477,4236.7305)"
          xlink:href="#interchange"
          id="use77"
-         inkscape:label="quarry_bay=1985_05_31"
-         style="stroke-width:0.5;stroke-dasharray:none" />
+         inkscape:label="quarry_bay=1989_10_01"
+         style="display:inline;stroke-width:0.5;stroke-dasharray:none" />
+      <use
+         x="857"
+         y="780"
+         xlink:href="#station"
+         id="use78-1"
+         inkscape:label="quarry_bay=1985_05_31-1989_10_01"
+         style="display:inline;stroke-width:0.5;stroke-dasharray:none"
+         transform="translate(-15.776203,-10.534072)" />
       <use
          x="857"
          y="780"
@@ -1067,16 +1164,32 @@
          y="622"
          xlink:href="#interchange"
          id="use83"
-         inkscape:label="lai_king=1982_05_10"
+         inkscape:label="lai_king=1998_06_22"
          style="stroke-width:0.5;stroke-dasharray:none" />
+      <use
+         x="622.5"
+         y="572.5"
+         xlink:href="#station"
+         id="use42-2"
+         inkscape:label="lai_king=1982_05_10-1998_06_22"
+         style="display:inline;stroke-width:0.5;stroke-dasharray:none"
+         transform="translate(-1.2597356,23.281895)" />
       <use
          transform="matrix(0.82399073,0.56660327,-0.4490205,0.65299434,347.7397,-177)"
          x="756"
          y="622"
          xlink:href="#interchange"
          id="use84"
-         inkscape:label="nam_cheong=2003_12_16"
+         inkscape:label="nam_cheong=2004_10_24"
          style="stroke-width:0.5;stroke-dasharray:none" />
+      <use
+         x="622.5"
+         y="572.5"
+         xlink:href="#station"
+         id="use42-2-7"
+         inkscape:label="nam_cheong=2003_12_16-2004_10_24"
+         style="display:inline;stroke-width:0.5;stroke-dasharray:none"
+         transform="translate(68.541096,85.5022)" />
       <use
          transform="matrix(-0.87701053,0.48047119,-0.38337858,-0.69978607,1259.833,718.408)"
          x="756"

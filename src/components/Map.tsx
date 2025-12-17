@@ -18,6 +18,8 @@ function renderTooltip(
     const name = processStationName(tooltip.raw, time);
 
     if (name) {
+        tooltip.el.style.pointerEvents = 'auto';
+
         return (
             <div
                 className="absolute px-3 py-2 bg-gray-900/90 text-white text-sm rounded-md shadow-lg pointer-events-none z-50 whitespace-nowrap backdrop-blur-sm"
@@ -34,6 +36,8 @@ function renderTooltip(
                 <div className="absolute w-2 h-2 bg-gray-900/90 rotate-45 -left-1 top-1/2 -translate-y-1/2"></div>
             </div>
         )
+    } else {
+        tooltip.el.style.pointerEvents = 'none';
     }
     return null;
 }
@@ -99,23 +103,26 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
 
                 const wrappedEl = setupHoverEffect(svgDoc, el);
 
-                wrappedEl.addEventListener('mouseenter', (e) => {
-                    const rect = svgRef.current!.getBoundingClientRect();
-                    setTooltip({
-                        x: e.clientX - rect.left,
-                        y: e.clientY - rect.top,
-                        raw: el.getAttribute('inkscape:label')!,
+                if (el.localName === 'use') {
+                    wrappedEl.addEventListener('mouseenter', (e) => {
+                        const rect = svgRef.current!.getBoundingClientRect();
+                        setTooltip({
+                            x: e.clientX - rect.left,
+                            y: e.clientY - rect.top,
+                            raw: el.getAttribute('inkscape:label')!,
+                            el: wrappedEl,
+                        });
                     });
-                });
-                wrappedEl.addEventListener('mousemove', (e) => {
-                    const rect = svgRef.current!.getBoundingClientRect();
-                    setTooltip(prev => prev ? {
-                        ...prev,
-                        x: e.clientX - rect.left,
-                        y: e.clientY - rect.top
-                    } : null);
-                });
-                wrappedEl.addEventListener('mouseleave', () => setTooltip(null));
+                    wrappedEl.addEventListener('mousemove', (e) => {
+                        const rect = svgRef.current!.getBoundingClientRect();
+                        setTooltip(prev => prev ? {
+                            ...prev,
+                            x: e.clientX - rect.left,
+                            y: e.clientY - rect.top
+                        } : null);
+                    });
+                    wrappedEl.addEventListener('mouseleave', () => setTooltip(null));
+                }
 
                 return {
                     el: wrappedEl,
@@ -221,12 +228,12 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
             </header>
             <footer className={
                 `absolute bottom-0 left-0 w-screen p-4 pt-2 flex flex-col justify-center items-center gap-2
-                bg-gray-400/50`
+                bg-gray-400/50 pointer-events-none`
             }>
                 <button
                     type="button"
                     onClick={() => playPause(setPlaying, time, setTime)}
-                    className="absolute left-6 top-6 h-8 flex justify-center items-center"
+                    className="absolute left-6 top-6 h-8 flex justify-center items-center pointer-events-auto"
                     aria-label={playing ? 'Pause timeline' : 'Play timeline'}
                 >
                     <img src={playing ? pause : play} alt={playing ? 'Pause' : 'Play'} className="h-full"/>
@@ -237,7 +244,7 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
                 >
                     {formatDate(new Date(time))}
                 </label>
-                <div className="relative w-full h-12 flex items-center px-4">
+                <div className="relative w-full h-12 flex items-center px-4 pointer-events-auto">
                     <input
                         id="date-slider"
                         type="range"
@@ -250,9 +257,10 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
                     <div className="absolute top-1/2 left-4 right-4 h-full -translate-y-1/2 pointer-events-none">
                         {
                             ticks.map(date => {
+                                const min_time = MIN_DATE.getTime();
                                 const pct = (
-                                    (date.getTime() - MIN_DATE.getTime())
-                                    / (MAX_DATE.getTime() - MIN_DATE.getTime())
+                                    (date.getTime() - min_time)
+                                    / (MAX_DATE.getTime() - min_time)
                                 ) * 100;
 
                                 return (
