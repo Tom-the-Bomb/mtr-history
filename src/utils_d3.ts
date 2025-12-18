@@ -8,13 +8,16 @@ export function update(dateNum: number, lines: LineWrapper[], stations: StationW
     for (const { el, dateRange: { appear, removed } } of lines) {
         if (appear <= now && now <= removed) {
             if (el.style.strokeDashoffset !== '0') {
+                const dashed = el.id === 'airportexpress_shared_section';
+
                 d3.select(el)
+                    .style('stroke-linecap', dashed ? 'butt' : 'round')
                     .transition('grow')
                     .duration(500)
                     .ease(d3.easeLinear)
                     .style('stroke-dashoffset', '0');
 
-                if (el.id === 'airportexpress_shared_section') {
+                if (dashed) {
                     el.style.strokeDasharray = '6, 6';
                 }
             }
