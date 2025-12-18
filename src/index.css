@@ -30,6 +30,11 @@
     @apply opacity-100 scale-100;
 }
 
+.zoom-btn {
+    @apply w-10 h-10 bg-gray-400/50 hover:bg-gray-400/70 backdrop-blur-sm
+    rounded flex items-center justify-center text-2xl font-bold transition-colors;
+}
+
 #date-slider {
     @apply appearance-none h-2 bg-gray-50/80 rounded-full;
 }

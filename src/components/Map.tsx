@@ -9,6 +9,8 @@ import mtrLogo from '../assets/mtr.svg'
 import mapSvg from '../assets/map.svg'
 import pause from '../assets/pause.svg'
 import play from '../assets/play.svg'
+import plus from '../assets/plus.svg'
+import minus from '../assets/minus.svg'
 
 function renderTooltip(
     stations: StationWrapper[],
@@ -51,6 +53,8 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
     const svgRef = useRef<HTMLObjectElement | null>(null);
     const linesRef = useRef<LineWrapper[]>([]);
     const stationsRef = useRef<StationWrapper[]>([]);
+    const zoomRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
+    const svgD3Ref = useRef<d3.Selection<SVGSVGElement, unknown, null, undefined> | null>(null);
 
     const [svgLoaded, setSvgLoaded] = useState(false);
     const [time, setTime] = useState<number>(MIN_DATE.getTime());
@@ -209,6 +213,9 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
             .call(zoom)
             .call(zoom.transform, d3.zoomIdentity.translate(initialTranslateX, initialTranslateY).scale(initialScale));
 
+        zoomRef.current = zoom;
+        svgD3Ref.current = svgd3;
+
         svgEl.removeAttribute('viewBox');
         svgEl.style.width = '100%';
         svgEl.style.height = '100%';
@@ -219,6 +226,24 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
     useEffect(() => {
         update(time, linesRef.current, stationsRef.current);
     }, [time]);
+
+    function handleZoomIn()     {
+        if (svgD3Ref.current && zoomRef.current) {
+            svgD3Ref.current
+                .transition()
+                .duration(300)
+                .call(zoomRef.current.scaleBy, 1.3);
+        }
+    };
+
+    function handleZoomOut() {
+        if (svgD3Ref.current && zoomRef.current) {
+            svgD3Ref.current
+                .transition()
+                .duration(300)
+                .call(zoomRef.current.scaleBy, 1 / 1.3);
+        }
+    };
 
     useEffect(() => {
         if (!playing) {
@@ -270,6 +295,24 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
                     </button>
                 </div>
             </header>
+            <div className="absolute bottom-31 left-4 flex flex-col gap-2 pointer-events-auto">
+                <button
+                    type="button"
+                    onClick={handleZoomIn}
+                    className="zoom-btn"
+                    aria-label="Zoom in"
+                >
+                    <img src={plus} alt="Zoom in" className="h-6 w-6"/>
+                </button>
+                <button
+                    type="button"
+                    onClick={handleZoomOut}
+                    className="zoom-btn"
+                    aria-label="Zoom out"
+                >
+                    <img src={minus} alt="Zoom out" className="h-6 w-6"/>
+                </button>
+            </div>
             <footer className={
                 `absolute bottom-0 left-0 w-screen p-4 pt-2 flex flex-col justify-center items-center gap-2
                 bg-gray-400/50 pointer-events-none`
