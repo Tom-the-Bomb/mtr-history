@@ -3,7 +3,7 @@ import Properties from './Properties';
 
 import mtrLogo from '../assets/mtr.svg';
 import crossPlatform from '../assets/crossplatform.webp';
-import rp from '../assets/RP.jpg';
+import railProperty from '../assets/railproperty.jpg';
 
 import propertiesData from '../assets/data/properties.json';
 
@@ -76,7 +76,7 @@ export default function Article({ setRenderArticle }: { setRenderArticle: (value
                                         <Properties stations={propertiesData.stations} />
                                     </div>
                                     <div className="flex-1">
-                                        <img src={rp} alt="" className="w-full h-auto rounded-md drop-shadow-lg"/>
+                                        <img src={railProperty} alt="" className="w-full h-auto rounded-md drop-shadow-lg"/>
                                     </div>
                                 </div>
                             </div>
@@ -101,7 +101,7 @@ export default function Article({ setRenderArticle }: { setRenderArticle: (value
                         </div>
                         <div className="flex flex-col gap-4">
                             <h3 className="text-2xl font-bold">MTR Spotlight</h3>
-                            Aside from the well-maintained, efficiend, and modern metro system, the MTR also has various other
+                            Aside from being a well-maintained, efficient, and modern metro system, the MTR also has various other
                             unique features that make it one of a kind, securing its spot as one of the best metro systems in the world.
                             <div>
                                 <h4 className="text-xl font-bold">Cross-Platform Interchanges</h4>
@@ -128,10 +128,18 @@ export default function Article({ setRenderArticle }: { setRenderArticle: (value
                                         to board the Tseung Kwan O Line train heading towards LOHAS Park, enabling same-direction cross-platform interchanges.
                                         The 2 station interchange allows for both same-direction and opposite-direction cross-platform interchanges, allowing passengers
                                         to take advantage of cross-platform interchanges regardless of their route. Combined with the high frequency of trains on both lines,
-                                        this setup makes it feel like the 2 lines are effectively 1. This might seem simple, but it requires meticulous planning,
+                                        this setup makes it feel like the two lines are effectively one. This might seem simple, but it requires meticulous planning,
                                         as somewhere between the 2 stations, the tracks of at least 1 line must swap in order to achieve this effect.
                                     </div>
                                 </div>
+                            </div>
+                            <div>
+                                <h4 className="text-xl font-bold">Octopus Card</h4>
+                                Introduced in 1997 by the MTR, the Octopus Card (八達通) was one of the world's first contactless smart card systems for public transportation.
+                                The card can be used to pay for fares on the MTR, buses, trams, ferries, and much more.
+                                Unlike other transit cards, which are only used for transportation, the Octopus Card has become one of the most popular payment methods
+                                in Hong Kong in general, from food to shopping, to even taking attendance at schools. It is so popular that recently, stores in Japan have began accepting
+                                Octopus Cards as a payment method due to the large number of Hong Kong tourists.
                             </div>
                         </div>
                         <div>
@@ -146,6 +154,13 @@ export default function Article({ setRenderArticle }: { setRenderArticle: (value
                             Hong Kong does not have the capacity for new railway projects one after another, and thus many employees would be left without work,
                             leading them to seek employment elsewhere. These workers, with the valuable experience from past MTR projects,
                             are critical for the MTR to retain for the success of future projects, and thus the MTR does so through these projects outside of Hong Kong.
+                        </div>
+                        <div>
+                            <h3 className="text-2xl font-bold">Conclusion</h3>
+                            The MTR system of Hong Kong has always been a popular choice as a case study for urban planners,
+                            and transit enthusiasts alike. It is a prime example of how a metro system can be successful and profitable
+                            through innovative business models and policies. The MTR has grown with the city and citizens of Hong Kong,
+                            and earned its spot as the backbone of the city's transportation network.
                         </div>
                     </div>
                 </article>
