@@ -277,7 +277,7 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
                 <button
                     type="button"
                     onClick={() => playPause(setPlaying, time, setTime)}
-                    className="absolute left-6 top-6 h-8 flex justify-center items-center pointer-events-auto"
+                    className="absolute left-5 top-4 h-10 flex justify-center items-center pointer-events-auto"
                     aria-label={playing ? 'Pause timeline' : 'Play timeline'}
                 >
                     <img src={playing ? pause : play} alt={playing ? 'Pause' : 'Play'} className="h-full"/>

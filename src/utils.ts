@@ -43,7 +43,7 @@ export function parseLabelDates(label: string): State[] {
 
 export function processStationName(station: StationWrapper, time: number): string | null {
     for (const state of station.states) {
-        if (time >= state.dateRange.appear.getTime() && time <= state.dateRange.removed.getTime()) {
+        if (state.dateRange.appear.getTime() <= time && time <= state.dateRange.removed.getTime()) {
             return state.name
                 .split('_')
                 .map(word => word.charAt(0).toUpperCase() + word.slice(1))
