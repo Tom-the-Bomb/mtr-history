@@ -12,25 +12,22 @@ export function update(dateNum: number, lines: LineWrapper[], stations: StationW
                     .transition()
                     .duration(500)
                     .ease(d3.easeLinear)
-                    .style('stroke-dashoffset', '0');
+                    .style('stroke-dashoffset', '0')
 
                 if (el.id === 'airportexpress_shared_section') {
                     el.style.strokeDasharray = '6, 6';
                 }
             }
         } else {
-            if (el.style.strokeDashoffset == '0') {
-                const length = el.getTotalLength().toString();
+            const length = el.getTotalLength().toString();
 
+            if (el.style.strokeDashoffset !== length) {
                 d3.select(el)
                     .transition()
                     .duration(500)
                     .ease(d3.easeLinear)
-                    .style('stroke-dashoffset', length);
-
-                if (el.id === 'airportexpress_shared_section') {
-                    el.style.strokeDasharray = length;
-                }
+                    .style('stroke-dashoffset', length)
+                    .style('stroke-dasharray', length);
             }
         }
     }
@@ -45,7 +42,7 @@ export function update(dateNum: number, lines: LineWrapper[], stations: StationW
                     .style('opacity', '1')
             }
         } else {
-            if (el.style.opacity === '1') {
+            if (el.style.opacity !== '0') {
                 d3.select(el)
                     .transition()
                     .duration(500)

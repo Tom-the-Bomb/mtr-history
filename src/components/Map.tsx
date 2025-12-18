@@ -57,6 +57,12 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
     const [playing, setPlaying] = useState(false);
     const [tooltip, setTooltip] = useState<RawTooltipData | null>(null);
 
+    function keyDownHandler(e: KeyboardEvent) {
+        if (e.code === 'Space') {
+            playPause(setPlaying, time, setTime);
+        }
+    }
+
     const ticks = useMemo(() => {
         const startYear = MIN_DATE.getFullYear();
         const endYear = MAX_DATE.getFullYear();
@@ -77,21 +83,16 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
     }, []);
 
     useEffect(() => {
-        function handler(e: KeyboardEvent) {
-            if (e.code === 'Space') {
-                e.preventDefault();
-                playPause(setPlaying, time, setTime);
-            }
-        }
-        document.addEventListener('keydown', handler);
-
-        return () => document.removeEventListener('keydown', handler);
+        document.addEventListener('keydown', keyDownHandler);
+        return () => document.removeEventListener('keydown', keyDownHandler);
     }, []);
 
     useEffect(() => {
         if (!(svgLoaded && svgRef.current)) return;
 
         const svgDoc = svgRef.current.contentDocument!;
+
+        svgDoc.addEventListener('keydown', keyDownHandler);
 
         const lines = svgDoc.querySelector('g#layer4')!;
         const stations = svgDoc.querySelector('g#layer3')!;
@@ -205,6 +206,8 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
         svgEl.removeAttribute('viewBox');
         svgEl.style.width = '100%';
         svgEl.style.height = '100%';
+
+        return () => svgDoc.removeEventListener('keydown', keyDownHandler);
     }, [svgLoaded]);
 
     useEffect(() => {
@@ -233,7 +236,7 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
 
     return (
         <>
-            <main className="w-screen h-screen">
+            <main className="w-screen h-screen" tabIndex={0}>
                 <object
                     ref={svgRef}
                     data={mapSvg}
