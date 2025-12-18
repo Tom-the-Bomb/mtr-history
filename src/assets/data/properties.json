@@ -1,0 +1,47 @@
+{
+    "stations": [
+        {
+            "name": "青衣 Tsing Yi Station",
+            "href": "https://www.mtr.com.hk/en/customer/services/station_list_tsingyi.html",
+            "properties": [
+                "Maritime Square (Shopping Mall)",
+                "Tsing Yi Station Estate (Residential, pop: 8.8k)"
+            ]
+        },
+        {
+            "name": "太古 Taikoo Station",
+            "href"  : "https://www.mtr.com.hk/en/customer/services/station_list_taikoo.html",
+            "properties": [
+                "Cityplaza (Shopping Mall)",
+                "Taikoo Shing (Residential, pop: 36k)"
+            ]
+        },
+        {
+            "name": "中環 Central Station",
+            "href": "https://www.mtr.com.hk/en/corporate/properties/il_central.html",
+            "properties": [
+                "IFC Mall (Shopping Mall)",
+                "2 IFC (Office Tower)",
+                "The Center (Office Tower)"
+            ]
+        },
+        {
+            "name": "九龍 Kowloon Station",
+            "href": "https://www.mtr.com.hk/en/corporate/properties/tcl_kowloon.html",
+            "properties": [
+                "Elements (Shopping Mall)",
+                "The Arch (Residential, estate pop: 19k)",
+                "The Waterfront (Residential, pop: 4k)",
+                "International Commerce Centre (Hotel + Office)"
+            ]
+        },
+        {
+            "name": "將軍澳 Tseung Kwan O Station",
+            "href": "https://www.mtr.com.hk/en/corporate/properties/tkol_tseungkwano.html",
+            "properties": [
+                "PopCorn (Shopping Mall)",
+                "The Wings (Residential, estate pop: 10k)"
+            ]
+        }
+    ]
+}
