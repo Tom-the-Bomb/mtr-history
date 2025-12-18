@@ -56,10 +56,16 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
     const [time, setTime] = useState<number>(MIN_DATE.getTime());
     const [playing, setPlaying] = useState(false);
     const [tooltip, setTooltip] = useState<RawTooltipData | null>(null);
+    const timeRef = useRef(time);
+
+    useEffect(() => {
+        timeRef.current = time;
+    }, [time]);
 
     function keyDownHandler(e: KeyboardEvent) {
         if (e.code === 'Space') {
-            playPause(setPlaying, time, setTime);
+            e.preventDefault();
+            playPause(setPlaying, timeRef.current, setTime);
         }
     }
 

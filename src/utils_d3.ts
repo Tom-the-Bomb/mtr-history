@@ -9,10 +9,10 @@ export function update(dateNum: number, lines: LineWrapper[], stations: StationW
         if (appear <= now && now <= removed) {
             if (el.style.strokeDashoffset !== '0') {
                 d3.select(el)
-                    .transition()
+                    .transition('grow')
                     .duration(500)
                     .ease(d3.easeLinear)
-                    .style('stroke-dashoffset', '0')
+                    .style('stroke-dashoffset', '0');
 
                 if (el.id === 'airportexpress_shared_section') {
                     el.style.strokeDasharray = '6, 6';
@@ -21,9 +21,10 @@ export function update(dateNum: number, lines: LineWrapper[], stations: StationW
         } else {
             const length = el.getTotalLength().toString();
 
-            if (el.style.strokeDashoffset !== length) {
+            if (el.style.strokeDashoffset !== length || el.style.strokeDasharray !== length) {
                 d3.select(el)
-                    .transition()
+                    .style('stroke-linecap', 'butt')
+                    .transition('shrink')
                     .duration(500)
                     .ease(d3.easeLinear)
                     .style('stroke-dashoffset', length)
@@ -36,7 +37,7 @@ export function update(dateNum: number, lines: LineWrapper[], stations: StationW
         if (states.some(({ dateRange: { appear, removed } }) => appear <= now && now <= removed)) {
             if (el.style.opacity !== '1') {
                 d3.select(el)
-                    .transition()
+                    .transition('appear')
                     .duration(500)
                     .ease(d3.easeLinear)
                     .style('opacity', '1')
@@ -44,7 +45,7 @@ export function update(dateNum: number, lines: LineWrapper[], stations: StationW
         } else {
             if (el.style.opacity !== '0') {
                 d3.select(el)
-                    .transition()
+                    .transition('disappear')
                     .duration(500)
                     .ease(d3.easeLinear)
                     .style('opacity', '0')
@@ -57,7 +58,7 @@ export function hoverMouseEnter(
     rect: Element,
     currentX: number, currentY: number,
     width: number, height: number,
-    rx: number, scaleFactor: number
+    rx: number, scaleFactor: number,
 ): void {
     d3.select(rect)
         .transition('hoverEffect')
