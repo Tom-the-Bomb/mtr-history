@@ -9,29 +9,36 @@ export function update(dateNum: number, lines: LineWrapper[], stations: StationW
         if (appear <= now && now <= removed) {
             if (el.style.strokeDashoffset !== '0') {
                 const dashed = el.id === 'airportexpress_shared_section';
+                const selection = d3.select(el);
 
-                d3.select(el)
-                    .style('stroke-linecap', dashed ? 'butt' : 'round')
+                if (dashed) {
+                    selection.style('stroke-dasharray', '6, 6');
+                }
+
+                selection
                     .transition('grow')
                     .duration(500)
                     .ease(d3.easeLinear)
                     .style('stroke-dashoffset', '0');
 
-                if (dashed) {
-                    el.style.strokeDasharray = '6, 6';
-                }
+                el.dataset.shrinking = 'false';
             }
         } else {
             const length = el.getTotalLength().toString();
 
             if (el.style.strokeDashoffset !== length || el.style.strokeDasharray !== length) {
-                d3.select(el)
-                    .style('stroke-linecap', 'butt')
-                    .transition('shrink')
-                    .duration(500)
-                    .ease(d3.easeLinear)
-                    .style('stroke-dashoffset', length)
-                    .style('stroke-dasharray', length);
+                if (el.dataset.shrinking !== 'true') {
+                    el.dataset.shrinking = 'true';
+                    d3.select(el)
+                        .transition('shrink')
+                        .duration(500)
+                        .ease(d3.easeLinear)
+                        .style('stroke-dashoffset', length)
+                        .style('stroke-dasharray', length)
+                        .on('end', () => {
+                            el.dataset.shrinking = 'false';
+                        });
+                }
             }
         }
     }
