@@ -96,7 +96,7 @@ export default function Article({ setRenderArticle }: { setRenderArticle: (value
                                 </div>
                             </div>
                             <div>
-                                <h4 className="text-xl font-bold">Uniqueness to Hong Kong</h4>
+                                <h4 className="text-xl font-bold">The Uniqueness of Hong Kong</h4>
                                 We can see that, unlike most metro systems, which come after the development of a city,
                                 the MTR was built alongside the development of Hong Kong, with numerous properties and towns
                                 having been constructed solely due to the MTR. Hong Kong is a small city with a high population density,
