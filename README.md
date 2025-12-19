@@ -1,15 +1,18 @@
 # MTR History
 
-A comprehensive overview of the Mass Transit Railway (MTR) Corporation and its railway network in Hong Kong, including relevant parts of the Kowloon Canton Railway (KCR).
+A comprehensive overview of the [Mass Transit Railway](https://www.mtr.com.hk/en/corporate/main/index.html) (MTR) Corporation
+and its railway network in Hong Kong. Includes relevant parts of the [Kowloon Canton Railway](https://www.kcrc.com/index.html) (KCR).
 
 ## Features
 
-1. Interactive Map
-Features an interactive map with a timeline that animates the history of the MTR.
-Powered by [`D3.js`](https://d3js.org/)
+1. **Interactive Map**
 
-2. Overview
-Overview of the MTR system in an article-like format (click on `Read More`)
+    Features an interactive map with a timeline slider that animates the development of the MTR.
+    Powered by [`D3.js`](https://d3js.org/)
+
+2. **Overview**
+
+    An overview of the MTR system and its success in an article-like format (click on `Read More`)
 
 Powered by `React` with `TS`, `Tailwind`, and `Vite`
 
@@ -25,12 +28,12 @@ The label processing code can be found at `parseLabelDates()` in [`utils.ts`](ht
 [^!]?*?<name>=<start-date>-<end-date>,...
 ```
 
-if there is no end-date, we assume **present day**
+if there is no end-date, it is assumed it exists **present day**
 
 ### Indicators
 
 - `^` indicates that this station was once part of the [KCR](https://en.wikipedia.org/wiki/Kowloon%E2%80%93Canton_Railway)
-- `!` indicates that this station was once part of BOTH the MTR and KCR.
+- `!` indicates that this station was once part of **both** the MTR and KCR.
 - `*` indicates that this station will have an interchange version of it appear underneath it in the future
 (this is needed for propogating hover events)
 
@@ -40,4 +43,4 @@ if there is no end-date, we assume **present day**
 *chater=1980_02_12-1985_05_31,central=1985_05_31-1986_05_23
 ```
 
-(Chater/Central station will become an interchange station once the island line is constructed)
+(The `*` denotes that Chater/Central station will become an interchange station once the island line is constructed)
