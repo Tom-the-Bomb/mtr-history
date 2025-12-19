@@ -25,15 +25,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="1.6098246"
-     inkscape:cx="782.69396"
-     inkscape:cy="1016.5704"
+     inkscape:zoom="3.2196492"
+     inkscape:cx="899.47688"
+     inkscape:cy="940.63043"
      inkscape:window-width="2256"
      inkscape:window-height="1398"
      inkscape:window-x="-11"
      inkscape:window-y="-11"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer4" />
+     inkscape:current-layer="layer3" />
   <title
      id="title1">MTR system map in English released to the public domain</title>
   <style
@@ -283,7 +283,7 @@
          style="stroke-width:1.5;stroke-dasharray:none;fill:none"
          class="tm line"
          d="m 693.73125,655.8195 c -0.52727,-0.50976 -1.06415,-1.00807 -1.61087,-1.49279 m 0,0 C 689.48421,651.98946 686.6193,649.9679 683.5,648.5 c -12.75,-6 -28.75,-9.25 -31.75,-11.75 -3,-2.5 -6.5,-4.5 -6.75,-8 -0.25,-3.5 -0.5,-10.25 -3.75,-16.5 C 638,606 629,584.75 619.75,576.25 610.5,567.75 612,569 608,567 c -4,-2 -7.5,-2.75 -10.75,-4.75 -3.25,-2 -17.5,-17 -23.75,-23.75 -6.25,-6.75 -92.25,-123.75 -96.5,-129.75 -4.25,-6 -11.25,-14.25 -13,-23.5 -1.75,-9.25 -4.5,-22.75 -5.75,-27 C 457,354 455.25,348.75 450,343 444.75,337.25 432.5,317.5 428.25,313.75 424,310 419.5,308 413.75,308.5 c -5.75,0.5 -32,3 -37.25,3 -5.25,0 -9,-0.75 -12,-2 -3,-1.25 -8.25,-2.75 -12.5,-2.75 -4.25,0 -12,-0.75 -16.5,-3 -4.5,-2.25 -17.75,-6 -20.75,-7.75 -3,-1.75 -12.75,-0.75 -18,3.5 -5.25,4.25 -35.5,31.25 -40.5,35.25 -5,4 -13,17.75 -16.5,26.5 -3.5,8.75 -18.5,47.25 -21,55.5 C 216.25,425 205,463 205,463"
-         inkscape:label="tuen_ma_line=2004_10_24" />
+         inkscape:label="tuen_ma_line=2003_12_20" />
       <path
          id="path586"
          style="display:inline;fill:none;stroke-width:1.5;stroke-dasharray:none"
@@ -662,7 +662,7 @@
          transform="rotate(-103.37986,571.30641,56.748801)"
          xlink:href="#interchange"
          id="use23"
-         inkscape:label="mei_foo=2004_10_24"
+         inkscape:label="mei_foo=2003_12_20"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          transform="translate(70.878853,86.317807)"
@@ -670,7 +670,7 @@
          y="539"
          xlink:href="#station"
          id="use24-1"
-         inkscape:label="*lai_wan=1982_05_17-1985_05_31,mei_foo=1985_05_31-2004_10_24"
+         inkscape:label="*lai_wan=1982_05_17-1985_05_31,mei_foo=1985_05_31-2003_12_20"
          style="display:inline;stroke-width:0.5;stroke-dasharray:none" />
       <use
          transform="translate(-4)"
@@ -1180,14 +1180,14 @@
          y="622"
          xlink:href="#interchange"
          id="use84"
-         inkscape:label="nam_cheong=2004_10_24"
+         inkscape:label="nam_cheong=2003_12_20"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          x="622.5"
          y="572.5"
          xlink:href="#station"
          id="use42-2-7"
-         inkscape:label="*nam_cheong=2003_12_16-2004_10_24"
+         inkscape:label="*nam_cheong=2003_12_16-2003_12_20"
          style="display:inline;stroke-width:0.5;stroke-dasharray:none"
          transform="translate(68.541096,85.5022)" />
       <use
@@ -1197,7 +1197,15 @@
          xlink:href="#interchange"
          id="use85"
          inkscape:label="sunny_bay=2005_08_01"
-         style="stroke-width:0.5;stroke-dasharray:none" />
+         style="display:inline;stroke-width:0.5;stroke-dasharray:none" />
+      <use
+         x="622.5"
+         y="572.5"
+         xlink:href="#station"
+         id="use42-2-4"
+         inkscape:label="*sunny_bay=2005_06_01-2005_08_01"
+         style="display:inline;stroke-width:0.5;stroke-dasharray:none"
+         transform="translate(-264.83007,72.409658)" />
       <use
          x="748"
          y="887"
