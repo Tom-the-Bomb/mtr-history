@@ -1,10 +1,31 @@
 import { useEffect, useRef, useState, useMemo } from 'react'
 import * as d3 from 'd3'
 
-import { type LineWrapper, type StationWrapper, type RawTooltipData, type LegendWrapper } from '../schemas'
-import { MAX_DATE, MIN_DATE, findName, formatDate, parseLabelDates, playPause } from '../utils'
-import { update, setupHoverEffect, hoverMouseEnter, hoverMouseLeave } from '../utils_d3'
+import {
+    type LineWrapper,
+    type StationWrapper,
+    type RawTooltipData,
+    type LegendWrapper,
+} from '../schemas'
 
+import {
+    MAX_DATE,
+    MIN_DATE,
+    findName,
+    formatDate,
+    parseLabelDates,
+    playPause,
+    KCR_MERGER_DATE,
+} from '../utils'
+
+import {
+    update,
+    setupHoverEffect,
+    hoverMouseEnter,
+    hoverMouseLeave,
+} from '../utils_d3'
+
+import kcrLogo from '../assets/kcr.svg'
 import mtrLogo from '../assets/mtr.svg'
 import mapSvg from '../assets/map.svg'
 import pause from '../assets/pause.svg'
@@ -24,10 +45,14 @@ function renderTooltip(
     }
 
     let name = findName(tooltip.station.states, time);
+    let status = tooltip.station.status;
 
     if (!name && tooltip.station.isRedundant) {
         const idx = stations.findIndex(station => station === tooltip.station);
+
+        const interchange = stations[idx - 1];
         name = findName(stations[idx - 1].states, time);
+        status = interchange.status;
     }
 
     if (name) {
@@ -44,7 +69,12 @@ function renderTooltip(
                 }}
             >
                 <div className="flex gap-2 items-center">
-                    <img src={mtrLogo} alt="" className="h-4"/>
+                    {
+                        (status !== 0 && time < KCR_MERGER_DATE) && <img src={kcrLogo} className="h-4"/>
+                    }
+                    {
+                        (status !== 1 || time >= KCR_MERGER_DATE) && <img src={mtrLogo} className="h-4"/>
+                    }
                     {name}
                 </div>
                 <div className="absolute w-2 h-2 bg-gray-900/90 rotate-45 -left-1 top-1/2 -translate-y-1/2"></div>
@@ -141,12 +171,22 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
                 el.style.opacity = '0';
 
                 const wrappedEl = setupHoverEffect(svgDoc, el);
-                const label = el.getAttribute('inkscape:label')!;
+                let label = el.getAttribute('inkscape:label')!;
+
+                const status = label.startsWith('^')
+                    ? 1
+                    : label.startsWith('!')
+                        ? 2
+                        : 0;
+                label = label.replace(/^[!^]/, '');
+                const isRedundant = label.startsWith('*');
+                label = label.replace(/^\*/, '');
 
                 const station = {
                     el: wrappedEl,
-                    isRedundant: label.startsWith('*'),
-                    states: parseLabelDates(label.replace(/^\*/, '')),
+                    isRedundant,
+                    status,
+                    states: parseLabelDates(label),
                 };
 
                 if (el.localName === 'use') {

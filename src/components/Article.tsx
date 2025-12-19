@@ -24,7 +24,7 @@ export default function Article({ setRenderArticle }: { setRenderArticle: (value
             </header>
             <main className="grow">
                 <article className="grow flex flex-col gap-8 items-center justify-center px-10 sm:px-20 lg:px-30 xl:px-60 py-20">
-                    <img src={mtrLogo} alt="" className="h-50"/>
+                    <img src={mtrLogo} className="h-50"/>
                     <div className="flex flex-col gap-3 items-center text-center">
                         <h1 className="text-5xl font-bold font-serif text-shadow-lg">The MTR System of Hong Kong</h1>
                         <h2 className="text-xl font-medium mb-8">By Tom the Bomb</h2>
@@ -109,7 +109,7 @@ export default function Article({ setRenderArticle }: { setRenderArticle: (value
                                             }
                                         </ul>
                                     </div>
-                                    <img src={railProperty} alt="" className="rounded-md drop-shadow-lg"/>
+                                    <img src={railProperty} className="rounded-md drop-shadow-lg"/>
                                 </div>
                             </div>
                             <div>
@@ -155,7 +155,7 @@ export default function Article({ setRenderArticle }: { setRenderArticle: (value
                                             between 2 lines, instead of only being able to interchange at only 1 station, passengers can
                                             interchange at either of 2 consecutive stations, depending on which direction they wish to go.
                                         </div>
-                                        <img src={crossPlatform} alt="" className="rounded-md p-2 shadow-lg"/>
+                                        <img src={crossPlatform} className="rounded-md p-2 shadow-lg"/>
                                     </div>
                                     <div>
                                         An example of this is the interchange between the

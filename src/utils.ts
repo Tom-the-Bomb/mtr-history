@@ -4,6 +4,9 @@ import { type State } from './schemas';
 export const MIN_DATE = new Date('1972-01-01');
 export const MAX_DATE = new Date('2023-01-01');
 
+export const TUEN_MA_OPENING_DATE = new Date('2021-06-27').getTime();
+export const KCR_MERGER_DATE = new Date('2007-12-02').getTime();
+
 export function playPause(
     setPlaying: (f: (playing: boolean) => boolean) => void,
     time: number,

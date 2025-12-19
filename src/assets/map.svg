@@ -25,15 +25,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="3.2196492"
-     inkscape:cx="899.47688"
-     inkscape:cy="940.63043"
+     inkscape:zoom="12.878597"
+     inkscape:cx="1105.7105"
+     inkscape:cy="1129.3544"
      inkscape:window-width="2256"
      inkscape:window-height="1398"
      inkscape:window-x="-11"
      inkscape:window-y="-11"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer3" />
+     inkscape:current-layer="zoom-layer" />
   <title
      id="title1">MTR system map in English released to the public domain</title>
   <style
@@ -435,49 +435,49 @@
          y="73"
          xlink:href="#station"
          id="use4"
-         inkscape:label="lo_wu=1910_10_01-1911_10_05,lo_wu=1949_10_14"
+         inkscape:label="^lo_wu=1910_10_01-1911_10_05,lo_wu=1949_10_14"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          x="469"
          y="111"
          xlink:href="#station"
          id="use5"
-         inkscape:label="lok_ma_chau=2007_08_15"
+         inkscape:label="^lok_ma_chau=2007_08_15"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          x="622"
          y="147"
          xlink:href="#station"
          id="use6"
-         inkscape:label="sheung_shui=1930_05_16"
+         inkscape:label="^sheung_shui=1930_05_16"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          x="646"
          y="169"
          xlink:href="#station"
          id="use7"
-         inkscape:label="fanling=1910_10_01"
+         inkscape:label="^fanling=1910_10_01"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          x="711"
          y="295"
          xlink:href="#station"
          id="use8"
-         inkscape:label="tai_wo=1989_05_09"
+         inkscape:label="^tai_wo=1989_05_09"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          x="737"
          y="315"
          xlink:href="#station"
          id="use9"
-         inkscape:label="tai_po_market=1910_10_01"
+         inkscape:label="^tai_po_market=1910_10_01"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          x="737"
          y="315"
          xlink:href="#station"
          id="use9-4"
-         inkscape:label="tai_po=1910_10_01-1966_01_01,tai_po_kau=1966_01_01-1983_05_02"
+         inkscape:label="^tai_po=1910_10_01-1966_01_01,tai_po_kau=1966_01_01-1983_05_02"
          style="display:inline;stroke-width:0.5;stroke-dasharray:none"
          transform="translate(38.28325,13.348933)" />
       <use
@@ -485,41 +485,41 @@
          y="401"
          xlink:href="#station"
          id="use10"
-         inkscape:label="ma_liu_shui=1956_09_24-1967_01_01,university=1967_01_01"
+         inkscape:label="^ma_liu_shui=1956_09_24-1967_01_01,university=1967_01_01"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          x="821.5"
          y="449"
          xlink:href="#station"
          id="use11"
-         inkscape:label="racecourse=1978_10_07"
+         inkscape:label="^racecourse=1978_10_07"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          x="806"
          y="456"
          xlink:href="#station"
          id="use12"
-         inkscape:label="fo_tan=1985_02_15"
+         inkscape:label="^fo_tan=1985_02_15"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          x="780"
          y="497"
          xlink:href="#station"
          id="use13"
-         inkscape:label="sha_tin=1910_10_01"
+         inkscape:label="^sha_tin=1910_10_01"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          transform="rotate(130,254.16164,440.53114)"
          xlink:href="#interchange"
          id="use14"
-         inkscape:label="tai_wai=2004_12_21"
+         inkscape:label="^tai_wai=2004_12_21"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          x="780"
          y="497"
          xlink:href="#station"
          id="use13-7"
-         inkscape:label="*tai_wai=1983_08_15-2004_12_21"
+         inkscape:label="^*tai_wai=1983_08_15-2004_12_21"
          style="display:inline;stroke-width:0.5;stroke-dasharray:none"
          transform="translate(-26.074252,31.087402)" />
       <use
@@ -528,14 +528,14 @@
          xlink:href="#interchange"
          transform="rotate(90,751.5,624.5)"
          id="use15"
-         inkscape:label="kowloon_tong=1982_05_04"
+         inkscape:label="!kowloon_tong=1982_05_04"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          x="745"
          y="673"
          xlink:href="#station"
          id="use16-0"
-         inkscape:label="*kowloon_tong=1979_10_01-1982_05_04"
+         inkscape:label="^*kowloon_tong=1979_10_01-1982_05_04"
          style="display:inline;stroke-width:0.5;stroke-dasharray:none"
          transform="translate(12.222632,-44.036669)" />
       <use
@@ -543,7 +543,7 @@
          y="673"
          xlink:href="#station"
          id="use16"
-         inkscape:label="yaumati=1910_10_01-1969_01_01,mong_kok=1969_01_01-2007_12_02,mong_kok_east=2007_12_02"
+         inkscape:label="^yaumati=1910_10_01-1969_01_01,mong_kok=1969_01_01-2007_12_02,mong_kok_east=2007_12_02"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          transform="rotate(90,19.883633,745.5305)"
@@ -556,7 +556,7 @@
          y="720.5"
          xlink:href="#station"
          id="use49-4"
-         inkscape:label="*hung_hom=1910_10_01-1921_09_15,kowloon=1975_11_30-1996_02_01,hung_hom=1996_02_01-2009_08_16"
+         inkscape:label="^*hung_hom=1910_10_01-1921_09_15,kowloon=1975_11_30-1996_02_01,hung_hom=1996_02_01-2009_08_16"
          style="display:inline;stroke-width:0.5;stroke-dasharray:none"
          transform="translate(-23.222357,5.189928)" />
       <use
@@ -564,63 +564,63 @@
          y="748"
          xlink:href="#station"
          id="EastTsimShaTsui"
-         inkscape:label="kowloon=1910_10_01-1975_11_30,east_tsim_sha_tsui=2004_10_24"
+         inkscape:label="^kowloon=1910_10_01-1975_11_30,east_tsim_sha_tsui=2004_10_24"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          x="934"
          y="360"
          xlink:href="#station"
          id="use17"
-         inkscape:label="wu_kai_sha=2004_12_21"
+         inkscape:label="^wu_kai_sha=2004_12_21"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          x="903"
          y="370"
          xlink:href="#station"
          id="use18"
-         inkscape:label="ma_on_shan=2004_12_21"
+         inkscape:label="^ma_on_shan=2004_12_21"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          x="886"
          y="393"
          xlink:href="#station"
          id="use19"
-         inkscape:label="heng_on=2004_12_21"
+         inkscape:label="^heng_on=2004_12_21"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          x="880"
          y="418"
          xlink:href="#station"
          id="use20"
-         inkscape:label="tai_shui_hang=2004_12_21"
+         inkscape:label="^tai_shui_hang=2004_12_21"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          x="841"
          y="477"
          xlink:href="#station"
          id="use21"
-         inkscape:label="shek_mun=2004_12_21"
+         inkscape:label="^shek_mun=2004_12_21"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          y="495"
          xlink:href="#station"
          x="825"
          id="use22"
-         inkscape:label="city_one=2004_12_21"
+         inkscape:label="^city_one=2004_12_21"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          x="806"
          y="512"
          xlink:href="#station"
          id="ShaTinWai"
-         inkscape:label="sha_tin_wai=2004_12_21"
+         inkscape:label="^sha_tin_wai=2004_12_21"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          x="781"
          y="520"
          xlink:href="#station"
          id="CheKungTemple"
-         inkscape:label="che_kung_temple=2004_12_21"
+         inkscape:label="^che_kung_temple=2004_12_21"
          style="stroke-width:0.5;stroke-dasharray:none"
          transform="translate(0.31059285,0.2070619)" />
       <use
@@ -662,7 +662,7 @@
          transform="rotate(-103.37986,571.30641,56.748801)"
          xlink:href="#interchange"
          id="use23"
-         inkscape:label="mei_foo=2003_12_20"
+         inkscape:label="!mei_foo=2003_12_20"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          transform="translate(70.878853,86.317807)"
@@ -670,7 +670,7 @@
          y="539"
          xlink:href="#station"
          id="use24-1"
-         inkscape:label="*lai_wan=1982_05_17-1985_05_31,mei_foo=1985_05_31-2003_12_20"
+         inkscape:label="^*lai_wan=1982_05_17-1985_05_31,mei_foo=1985_05_31-2003_12_20"
          style="display:inline;stroke-width:0.5;stroke-dasharray:none" />
       <use
          transform="translate(-4)"
@@ -678,20 +678,20 @@
          y="539"
          xlink:href="#station"
          id="use24"
-         inkscape:label="tsuen_wan_west=2003_12_20"
+         inkscape:label="^tsuen_wan_west=2003_12_20"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          x="451"
          y="345"
          xlink:href="#station"
          id="use25"
-         inkscape:label="kam_sheung_road=2003_12_20"
+         inkscape:label="^kam_sheung_road=2003_12_20"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          transform="matrix(0.98,0.17,-0.17,0.98,372.4301,313.4698)"
          xlink:href="#interchange"
          id="use26"
-         inkscape:label="yuen_long=2003_12_20"
+         inkscape:label="^yuen_long=2003_12_20"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          transform="translate(-2.41613,-0.4393)"
@@ -699,25 +699,25 @@
          y="307"
          xlink:href="#station"
          id="use27"
-         inkscape:label="long_ping=2003_12_20"
+         inkscape:label="^long_ping=2003_12_20"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          transform="matrix(-0.6923852,-0.71826367,0.71826367,-0.6923852,294.6597,299.3904)"
          xlink:href="#interchange"
          id="use28"
-         inkscape:label="tin_shui_wai=2003_12_20"
+         inkscape:label="^tin_shui_wai=2003_12_20"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          transform="matrix(-0.34,0.94,-0.94,-0.34,221,410)"
          xlink:href="#interchange"
          id="use29"
-         inkscape:label="siu_hong=2003_12_20"
+         inkscape:label="^siu_hong=2003_12_20"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          transform="matrix(-0.94775233,-0.31775063,0.31775063,-0.94775233,205.8812,459.475)"
          xlink:href="#interchange"
          id="use30"
-         inkscape:label="tuen_mun=2003_12_20"
+         inkscape:label="^tuen_mun=2003_12_20"
          style="stroke-width:0.5;stroke-dasharray:none" />
       <use
          transform="translate(0.54912,-3.5199)"

@@ -21,6 +21,7 @@ export interface State {
 export interface StationWrapper {
     el: HTMLElement
     isRedundant: boolean
+    status: number
     states: State[]
 }
 

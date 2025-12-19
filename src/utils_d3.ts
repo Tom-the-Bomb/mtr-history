@@ -1,9 +1,7 @@
 import * as d3 from 'd3';
 
 import { type LineWrapper, type StationWrapper } from './schemas';
-import { findName } from './utils';
-
-const TUEN_MA_OPENING_DATE = new Date('2021-06-27').getTime();
+import { findName, TUEN_MA_OPENING_DATE } from './utils';
 
 export function update(dateNum: number, lines: LineWrapper[], stations: StationWrapper[]): void {
     for (const { el, dateRange: { appear, removed } } of lines) {
