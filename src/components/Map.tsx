@@ -311,7 +311,7 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
                     type="image/svg+xml"
                     className="absolute top-0 left-0 w-full h-full"
                 />
-                {renderTooltip(stationsRef.current, tooltip, time)}
+                {svgLoaded && renderTooltip(stationsRef.current, tooltip, time)}
             </main>
             <header className={
                 `absolute top-0 left-0 w-dvw pt-15 flex flex-col justify-center items-center gap-3 text-center pointer-events-none`
