@@ -1,12 +1,8 @@
 {
     "lines": [
         {
-            "label": "KCR_british_section=1910_10_01-1996_02_01,KCR_east_rail=1996_02_01-2007_12_02,east_rail_line=2008_12_02",
+            "label": "KCR_british_section=1910_10_01-1996_02_01,KCR_east_rail=1996_02_01-2007_12_02,east_rail_line=2007_12_02",
             "color": "rgb(83,183,232)"
-        },
-        {
-            "label": "island_line=1985_05_31",
-            "color": "rgb(0,125,197)"
         },
         {
             "label": "kwun_tong_line=1979_10_01",
@@ -17,28 +13,20 @@
             "color": "rgb(237,29,36)"
         },
         {
-            "label": "tung_chung_line=1998_06_22",
-            "color": "rgb(247,148,62)"
-        },
-        {
-            "label": "airport_express=1998_07_06",
-            "color": "rgb(0,136,138)"
-        },
-        {
-            "label": "ngong_ping_360=2006_09_18",
-            "color": "rgb(148,152,154)"
+            "label": "island_line=1985_05_31",
+            "color": "rgb(0,125,197)"
         },
         {
             "label": "KCR_light_rail=1988_09_24-2007_12_02,light_rail=2007_12_02",
             "color": "rgb(211,168,9)"
         },
         {
-            "label": "disneyland_resort_line=2005_08_01",
-            "color": "rgb(241,115,172)"
+            "label": "tung_chung_line=1998_06_22",
+            "color": "rgb(247,148,62)"
         },
         {
-            "label": "south_island_line=2016_12_28",
-            "color": "rgb(186,196,41)"
+            "label": "airport_express=1998_07_06",
+            "color": "rgb(0,136,138)"
         },
         {
             "label": "tseung_kwan_o_line=2002_08_04",
@@ -51,6 +39,18 @@
         {
             "label": "ma_on_shan_rail=2004_12_21-2007_12_02,ma_on_shan_line=2007_12_02-2020_02_14,tuen_ma_line_phase_1=2020_02_14-2021_06_27,tuen_ma_line=2021_06_27",
             "color": "rgb(146,48,17)"
+        },
+        {
+            "label": "disneyland_resort_line=2005_08_01",
+            "color": "rgb(241,115,172)"
+        },
+        {
+            "label": "ngong_ping_360=2006_09_18",
+            "color": "rgb(148,152,154)"
+        },
+        {
+            "label": "south_island_line=2016_12_28",
+            "color": "rgb(186,196,41)"
         }
     ]
 }

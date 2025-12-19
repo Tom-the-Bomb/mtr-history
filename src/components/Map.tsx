@@ -91,7 +91,7 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
 
     useEffect(() => {
         function handler() {
-            window.location.reload();
+            //window.location.reload();
         }
         window.addEventListener('resize', handler);
 
@@ -104,6 +104,14 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
     }, []);
 
     useEffect(() => {
+        legendRef.current = linesData.lines
+            .map(line => ({
+                color: line.color,
+                states: parseLabelDates(line.label),
+            }));
+    }, []);
+
+    useEffect(() => {
         if (!(svgLoaded && svgRef.current)) return;
 
         const svgDoc = svgRef.current.contentDocument!;
@@ -112,12 +120,6 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
 
         const lines = svgDoc.querySelector('g#layer4')!;
         const stations = svgDoc.querySelector('g#layer3')!;
-
-        legendRef.current = linesData.lines
-            .map(line => ({
-                color: line.color,
-                states: parseLabelDates(line.label),
-            }));
 
         linesRef.current = Array.from(lines.querySelectorAll('path'))
             .map(el => {
@@ -321,7 +323,7 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
                     <img src={minus} alt="Zoom out" className="h-6 w-6"/>
                 </button>
             </div>
-            <div className="absolute bottom-30 flex flex-wrap justify-center px-[7vw] items-center gap-1 pointer-events-none">
+            <div className="absolute bottom-29 flex flex-wrap justify-center w-3/4 md:w-2/3 lg:w-1/2 items-center gap-1 pointer-events-none">
                 {
                     legendRef.current
                         ?.map((line) => {

@@ -1,8 +1,8 @@
 
 import { type State } from './schemas';
 
-export const MIN_DATE = new Date(1972, 0, 1);
-export const MAX_DATE = new Date(2023, 0, 1);
+export const MIN_DATE = new Date('1972-01-01');
+export const MAX_DATE = new Date('2023-01-01');
 
 export function playPause(
     setPlaying: (f: (playing: boolean) => boolean) => void,
