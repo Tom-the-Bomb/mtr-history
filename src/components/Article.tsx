@@ -1,6 +1,3 @@
-
-import Properties from './Properties';
-
 import mtrLogo from '../assets/mtr.svg';
 import crossPlatform from '../assets/crossplatform.webp';
 import railProperty from '../assets/railproperty.jpg';
@@ -41,7 +38,7 @@ export default function Article({ setRenderArticle }: { setRenderArticle: (value
                             discrepancy in the quality of systems across various cities worldwide, with some systems being objectively inferior to others,
                             even in comparably sized cities. Among these many metropolises, Hong Kong stands out as one that boasts one of the best transit
                             networks in the world. With a robust public transit system featuring 10 heavy rail lines with 98 stations, a 68-station light rail
-                            network, and a vast network of buses and trams throughout the city. In 2024, there were around 12 million passenger journeys daily
+                            network, and a vast network of buses and trams throughout the city. In 2024, there were around 12 million passenger journeys daily taken on public transit
                             (6 million on the <Link href="https://wikipedia.org/wiki/Mass_Transit_Railway">Mass Transit Railway (MTR)</Link> alone),
                             in a city of just over 7 million people.
                         </div>
@@ -90,7 +87,27 @@ export default function Article({ setRenderArticle }: { setRenderArticle: (value
                                     <div className="flex flex-col gap-2">
                                         Some of the most notable examples of properties<br/>
                                         developed by the MTR include:
-                                        <Properties stations={propertiesData.stations} />
+                                        <ul className="list-disc list-inside">
+                                            {
+                                                propertiesData.stations.map((station) => (
+                                                    <li key={station.name}>
+                                                        <a
+                                                            href={station.href}
+                                                            className="font-bold effect-underline text-blue-600"
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                        >
+                                                            {station.name}
+                                                        </a>
+                                                        <ul className="list-disc list-inside ml-5">
+                                                            {station.properties.map((name, index) => (
+                                                                <li key={index}>{name}</li>
+                                                            ))}
+                                                        </ul>
+                                                    </li>
+                                                ))
+                                            }
+                                        </ul>
                                     </div>
                                     <img src={railProperty} alt="" className="rounded-md drop-shadow-lg"/>
                                 </div>

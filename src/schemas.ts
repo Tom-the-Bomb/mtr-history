@@ -3,6 +3,11 @@ export interface DateInterval {
     removed: Date
 }
 
+export interface LegendWrapper {
+    color: string
+    states: State[]
+}
+
 export interface LineWrapper {
     el: SVGPathElement
     dateRange: DateInterval

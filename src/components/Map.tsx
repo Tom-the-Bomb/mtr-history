@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState, useMemo } from 'react'
 import * as d3 from 'd3'
 
-import { type LineWrapper, type StationWrapper, type RawTooltipData } from '../schemas'
-import { MAX_DATE, MIN_DATE, formatDate, parseLabelDates, playPause, processStationName } from '../utils'
+import { type LineWrapper, type StationWrapper, type RawTooltipData, type LegendWrapper } from '../schemas'
+import { MAX_DATE, MIN_DATE, findName, formatDate, parseLabelDates, playPause } from '../utils'
 import { update, setupHoverEffect, hoverMouseEnter, hoverMouseLeave } from '../utils_d3'
 
 import mtrLogo from '../assets/mtr.svg'
@@ -11,6 +11,8 @@ import pause from '../assets/pause.svg'
 import play from '../assets/play.svg'
 import plus from '../assets/plus.svg'
 import minus from '../assets/minus.svg'
+
+import linesData from '../assets/data/lines.json'
 
 function renderTooltip(
     stations: StationWrapper[],
@@ -21,17 +23,20 @@ function renderTooltip(
         return null;
     }
 
-    let name = processStationName(tooltip.station, time);
+    let name = findName(tooltip.station.states, time);
 
     if (!name && tooltip.station.isRedundant) {
         const idx = stations.findIndex(station => station === tooltip.station);
-        name = processStationName(stations[idx - 1], time);
+        name = findName(stations[idx - 1].states, time);
     }
 
     if (name) {
         return (
             <div
-                className="absolute px-3 py-2 bg-gray-900/90 text-white text-sm rounded-md shadow-lg pointer-events-none z-50 whitespace-nowrap backdrop-blur-sm"
+                className={
+                    `absolute px-3 py-2 bg-gray-900/90 text-white text-sm rounded-md
+                    shadow-lg pointer-events-none z-50 whitespace-nowrap backdrop-blur-sm`
+                }
                 style={{
                     left: `${tooltip.x + 10}px`,
                     top: `${tooltip.y + 10}px`,
@@ -51,6 +56,7 @@ function renderTooltip(
 
 export default function Map({ setRenderArticle }: { setRenderArticle: (value: boolean) => void }) {
     const svgRef = useRef<HTMLObjectElement | null>(null);
+    const legendRef = useRef<LegendWrapper[]>([]);
     const linesRef = useRef<LineWrapper[]>([]);
     const stationsRef = useRef<StationWrapper[]>([]);
     const zoomRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
@@ -106,6 +112,12 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
 
         const lines = svgDoc.querySelector('g#layer4')!;
         const stations = svgDoc.querySelector('g#layer3')!;
+
+        legendRef.current = linesData.lines
+            .map(line => ({
+                color: line.color,
+                states: parseLabelDates(line.label),
+            }));
 
         linesRef.current = Array.from(lines.querySelectorAll('path'))
             .map(el => {
@@ -227,24 +239,6 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
         update(time, linesRef.current, stationsRef.current);
     }, [time]);
 
-    function handleZoomIn()     {
-        if (svgD3Ref.current && zoomRef.current) {
-            svgD3Ref.current
-                .transition()
-                .duration(300)
-                .call(zoomRef.current.scaleBy, 1.3);
-        }
-    };
-
-    function handleZoomOut() {
-        if (svgD3Ref.current && zoomRef.current) {
-            svgD3Ref.current
-                .transition()
-                .duration(300)
-                .call(zoomRef.current.scaleBy, 1 / 1.3);
-        }
-    };
-
     useEffect(() => {
         if (!playing) {
             return;
@@ -266,8 +260,8 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
     }, [playing]);
 
     return (
-        <>
-            <main className="w-screen h-screen" tabIndex={0}>
+        <div className="w-dvw h-dvh flex justify-center items-center">
+            <main className="w-dvw h-dvh">
                 <object
                     ref={svgRef}
                     data={mapSvg}
@@ -278,7 +272,7 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
                 {renderTooltip(stationsRef.current, tooltip, time)}
             </main>
             <header className={
-                `absolute top-0 left-0 w-screen pt-15 flex flex-col justify-center items-center gap-3 text-center pointer-events-none`
+                `absolute top-0 left-0 w-dvw pt-15 flex flex-col justify-center items-center gap-3 text-center pointer-events-none`
             }>
                 <div>
                     <h1 className="text-5xl font-bold font-serif text-shadow-xl">MTR History</h1>
@@ -298,7 +292,14 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
             <div className="absolute bottom-31 left-4 flex flex-col gap-2 pointer-events-auto">
                 <button
                     type="button"
-                    onClick={handleZoomIn}
+                    onClick={() => {
+                        if (svgD3Ref.current && zoomRef.current) {
+                            svgD3Ref.current
+                                .transition()
+                                .duration(300)
+                                .call(zoomRef.current.scaleBy, 1.3);
+                        }
+                    }}
                     className="zoom-btn"
                     aria-label="Zoom in"
                 >
@@ -306,15 +307,45 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
                 </button>
                 <button
                     type="button"
-                    onClick={handleZoomOut}
+                    onClick={() => {
+                        if (svgD3Ref.current && zoomRef.current) {
+                            svgD3Ref.current
+                                .transition()
+                                .duration(300)
+                                .call(zoomRef.current.scaleBy, 1 / 1.3);
+                        }
+                    }}
                     className="zoom-btn"
                     aria-label="Zoom out"
                 >
                     <img src={minus} alt="Zoom out" className="h-6 w-6"/>
                 </button>
             </div>
+            <div className="absolute bottom-30 flex flex-wrap justify-center px-[7vw] items-center gap-1 pointer-events-none">
+                {
+                    legendRef.current
+                        ?.map((line) => {
+                            const name = findName(line.states, time);
+
+                            if (name) {
+                                return (
+                                    <div key={line.color} className={
+                                        `p-1 rounded-md
+                                        flex items-center gap-2 text-[7px] md:text-[10px] pointer-events-none
+                                        bg-gray-400/10 text-gray-600`
+                                    }>
+                                        <div className="w-3 md:w-4 h-1 md:h-2 rounded-sm" style={{ backgroundColor: line.color }}></div>
+                                        <span className="text-nowrap">{name}</span>
+                                    </div>
+                                )
+                            }
+                            return null;
+                        })
+                        .filter(el => el !== null)
+                }
+            </div>
             <footer className={
-                `absolute bottom-0 left-0 w-screen p-4 pt-2 flex flex-col justify-center items-center gap-2
+                `absolute bottom-0 left-0 w-dvw p-4 pt-2 flex flex-col justify-center items-center gap-2
                 bg-gray-400/50 pointer-events-none`
             }>
                 <button
@@ -365,6 +396,6 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
                     </div>
                 </div>
             </footer>
-        </>
+        </div>
     )
 }

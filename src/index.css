@@ -12,6 +12,10 @@
    --font-mono: 'JetBrains Mono', monospace;
 }
 
+html, body {
+    @apply bg-white;
+}
+
 .nav-btn {
     @apply font-medium outline rounded outline-gray-400 py-1 px-2 hover:outline-2;
 }

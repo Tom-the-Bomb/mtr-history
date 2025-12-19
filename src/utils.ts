@@ -1,5 +1,5 @@
 
-import { type State, type StationWrapper } from './schemas';
+import { type State } from './schemas';
 
 export const MIN_DATE = new Date(1972, 0, 1);
 export const MAX_DATE = new Date(2023, 0, 1);
@@ -35,20 +35,18 @@ export function parseLabelDates(label: string): State[] {
             : MAX_DATE;
 
         return {
-            name,
+            name: name
+                .split('_')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' '),
             dateRange: { appear, removed }
         };
     });
 }
 
-export function processStationName(station: StationWrapper, time: number): string | null {
-    for (const state of station.states) {
-        if (state.dateRange.appear.getTime() <= time && time <= state.dateRange.removed.getTime()) {
-            return state.name
-                .split('_')
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(' ');
-        }
-    }
-    return null;
+export function findName(states: State[], time: number): string | null {
+    return states
+        .find(({ dateRange: { appear, removed } }) => {
+            return appear.getTime() <= time && time <= removed.getTime();
+        })?.name || null;
 }

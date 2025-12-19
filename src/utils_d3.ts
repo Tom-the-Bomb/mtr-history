@@ -1,12 +1,11 @@
 import * as d3 from 'd3';
 
 import { type LineWrapper, type StationWrapper } from './schemas';
+import { findName } from './utils';
 
 export function update(dateNum: number, lines: LineWrapper[], stations: StationWrapper[]): void {
-    const now = new Date(Number(dateNum));
-
     for (const { el, dateRange: { appear, removed } } of lines) {
-        if (appear <= now && now <= removed) {
+        if (appear.getTime() <= dateNum && dateNum <= removed.getTime()) {
             if (el.style.strokeDashoffset !== '0') {
                 const selection = d3.select(el);
 
@@ -43,7 +42,7 @@ export function update(dateNum: number, lines: LineWrapper[], stations: StationW
     }
 
     for (const { el, states } of stations) {
-        if (states.some(({ dateRange: { appear, removed } }) => appear <= now && now <= removed)) {
+        if (findName(states, dateNum) !== null) {
             if (el.style.opacity !== '1') {
                 d3.select(el)
                     .transition('appear')
