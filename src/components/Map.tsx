@@ -121,7 +121,7 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
 
     useEffect(() => {
         function handler() {
-            //window.location.reload();
+            window.location.reload();
         }
         window.addEventListener('resize', handler);
 
@@ -383,7 +383,6 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
                             }
                             return null;
                         })
-                        .filter(el => el !== null)
                 }
             </div>
             <footer className={
