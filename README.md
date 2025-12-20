@@ -25,7 +25,7 @@ for the website to process the station and line names, dates and other relevant 
 The label processing code can be found at `parseLabelDates()` in [`utils.ts`](https://github.com/Tom-the-Bomb/mtr-history/blob/main/src/utils.ts)
 
 ```txt
-[^!]?*?<name>=<start-date>-<end-date>,...
+(!|^)?*?<name>=<start-date>-<end-date>,...
 ```
 
 if there is no end-date, it is assumed it exists **present day**
