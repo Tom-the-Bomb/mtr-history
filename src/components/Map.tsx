@@ -1,5 +1,11 @@
-import { useEffect, useRef, useState, useMemo } from 'react'
+
 import * as d3 from 'd3'
+import {
+    useEffect,
+    useState,
+    useMemo,
+    useRef,
+} from 'react'
 
 import {
     type LineWrapper,
@@ -377,7 +383,7 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
                                         bg-gray-400/10 text-gray-600`
                                     }>
                                         <div className="w-3 md:w-4 h-1 md:h-2 rounded-sm" style={{ backgroundColor: line.color }}></div>
-                                        <span className="text-nowrap">{name}</span>
+                                        {name}
                                     </div>
                                 )
                             }

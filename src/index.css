@@ -12,6 +12,10 @@
    --font-mono: 'JetBrains Mono', monospace;
 }
 
+*:focus {
+    outline: none;
+}
+
 html, body {
     @apply bg-white;
 }
@@ -78,8 +82,4 @@ html, body {
     background-size: contain;
     box-shadow: none;
     cursor: pointer;
-}
-
-*:focus {
-    outline: none;
 }

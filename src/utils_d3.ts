@@ -1,7 +1,14 @@
 import * as d3 from 'd3';
 
-import { type LineWrapper, type StationWrapper } from './schemas';
-import { findName, TUEN_MA_OPENING_DATE } from './utils';
+import {
+    type LineWrapper,
+    type StationWrapper,
+} from './schemas';
+
+import {
+    findName,
+    TUEN_MA_OPENING_DATE,
+} from './utils';
 
 export function update(dateNum: number, lines: LineWrapper[], stations: StationWrapper[]): void {
     for (const { el, dateRange: { appear, removed } } of lines) {
