@@ -27,7 +27,7 @@ export function update(dateNum: number, lines: LineWrapper[], stations: StationW
                 }
 
                 selection
-                    .transition('grow')
+                    .transition()
                     .duration(500)
                     .ease(d3.easeLinear)
                     .style('stroke-dashoffset', '0');
@@ -41,7 +41,7 @@ export function update(dateNum: number, lines: LineWrapper[], stations: StationW
                 if (el.dataset.shrinking !== 'true') {
                     el.dataset.shrinking = 'true';
                     d3.select(el)
-                        .transition('shrink')
+                        .transition()
                         .duration(500)
                         .ease(d3.easeLinear)
                         .style('stroke-dashoffset', length)
