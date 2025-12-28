@@ -299,12 +299,10 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
 
                 if (lastDistance > 0) {
                     const scale = distance / lastDistance;
-                    if (svgD3Ref.current && zoomRef.current) {
-                        svgD3Ref.current.call(
-                            zoomRef.current.scaleBy,
-                            scale
-                        );
-                    }
+                    svgD3Ref.current?.call(
+                        zoomRef.current!.scaleBy,
+                        scale,
+                    );
                     lastDistance = distance;
                 }
             }
@@ -316,7 +314,10 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
 
         svgd3
             .call(zoom)
-            .call(zoom.transform, d3.zoomIdentity.translate(initialTranslateX, initialTranslateY).scale(initialScale));
+            .call(zoom.transform, d3.zoomIdentity
+                .translate(initialTranslateX, initialTranslateY)
+                .scale(initialScale)
+            );
 
         zoomRef.current = zoom;
         svgD3Ref.current = svgd3;
