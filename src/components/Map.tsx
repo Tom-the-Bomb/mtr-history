@@ -270,6 +270,50 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
                 zoomLayer.attr('transform', event.transform.toString())
             });
 
+        svgEl.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+        }, { passive: false });
+
+        let lastDistance = 0;
+
+        svgEl.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 2) {
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                lastDistance = Math.hypot(
+                    touch2.clientX - touch1.clientX,
+                    touch2.clientY - touch1.clientY
+                );
+            }
+        }, { passive: true });
+
+        svgEl.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 2) {
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+
+                const distance = Math.hypot(
+                    touch2.clientX - touch1.clientX,
+                    touch2.clientY - touch1.clientY
+                );
+
+                if (lastDistance > 0) {
+                    const scale = distance / lastDistance;
+                    if (svgD3Ref.current && zoomRef.current) {
+                        svgD3Ref.current.call(
+                            zoomRef.current.scaleBy,
+                            scale
+                        );
+                    }
+                    lastDistance = distance;
+                }
+            }
+        }, { passive: false });
+
+        svgEl.addEventListener('touchend', () => {
+            lastDistance = 0;
+        }, { passive: true });
+
         svgd3
             .call(zoom)
             .call(zoom.transform, d3.zoomIdentity.translate(initialTranslateX, initialTranslateY).scale(initialScale));
@@ -309,14 +353,14 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
     }, [playing]);
 
     return (
-        <div className="w-dvw h-dvh flex justify-center items-center">
-            <main className="w-dvw h-dvh">
+        <div className="w-dvw h-dvh flex justify-center items-center touch-none">
+            <main className="w-dvw h-dvh touch-none">
                 <object
                     ref={svgRef}
                     data={mapSvg}
                     onLoad={() => setSvgLoaded(true)}
                     type="image/svg+xml"
-                    className="absolute top-0 left-0 w-full h-full"
+                    className="absolute top-0 left-0 w-full h-full touch-none"
                 />
                 {svgLoaded && renderTooltip(stations, tooltip, time)}
             </main>
