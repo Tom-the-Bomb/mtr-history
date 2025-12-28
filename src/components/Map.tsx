@@ -11,7 +11,6 @@ import {
     type LineWrapper,
     type StationWrapper,
     type RawTooltipData,
-    type LegendWrapper,
 } from '../schemas'
 
 import {
@@ -92,9 +91,9 @@ function renderTooltip(
 
 export default function Map({ setRenderArticle }: { setRenderArticle: (value: boolean) => void }) {
     const svgRef = useRef<HTMLObjectElement | null>(null);
-    const legendRef = useRef<LegendWrapper[]>([]);
     const linesRef = useRef<LineWrapper[]>([]);
     const stationsRef = useRef<StationWrapper[]>([]);
+    const [stations, setStations] = useState<StationWrapper[]>([]);
     const zoomRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
     const svgD3Ref = useRef<d3.Selection<SVGSVGElement, unknown, null, undefined> | null>(null);
 
@@ -139,13 +138,13 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
         return () => document.removeEventListener('keydown', keyDownHandler);
     }, []);
 
-    useEffect(() => {
-        legendRef.current = linesData.lines
-            .map(line => ({
-                color: line.color,
-                states: parseLabelDates(line.label),
-            }));
-    }, []);
+    const legend = useMemo(() =>
+        linesData.lines.map(line => ({
+            color: line.color,
+            states: parseLabelDates(line.label),
+        })),
+        [],
+    );
 
     useEffect(() => {
         if (!(svgLoaded && svgRef.current)) return;
@@ -217,6 +216,8 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
                 return station;
             });
 
+        setStations(stationsRef.current);
+
         for (const station of stationsRef.current) {
             if (station.isRedundant) {
                 const idx = stationsRef.current.findIndex(st => st === station);
@@ -238,7 +239,7 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
             }
         }
 
-        update(time, linesRef.current, stationsRef.current);
+        update(MIN_DATE.getTime(), linesRef.current, stationsRef.current);
 
         const svgd3 = d3.select(svgDoc).select<SVGSVGElement>('svg');
         const zoomLayer = d3.select(svgDoc).select<SVGGElement>('#zoom-layer');
@@ -317,7 +318,7 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
                     type="image/svg+xml"
                     className="absolute top-0 left-0 w-full h-full"
                 />
-                {svgLoaded && renderTooltip(stationsRef.current, tooltip, time)}
+                {svgLoaded && renderTooltip(stations, tooltip, time)}
             </main>
             <header className={
                 `absolute top-0 left-0 w-dvw pt-15 flex flex-col justify-center items-center gap-3 text-center pointer-events-none`
@@ -371,24 +372,23 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
             </div>
             <div className="absolute bottom-29 flex flex-wrap justify-center w-2/3 lg:w-1/2 items-center gap-1 pointer-events-none">
                 {
-                    legendRef.current
-                        ?.map((line) => {
-                            const name = findName(line.states, time);
+                    legend.map((line) => {
+                        const name = findName(line.states, time);
 
-                            if (name) {
-                                return (
-                                    <div key={line.color} className={
-                                        `p-1 rounded-md
-                                        flex items-center gap-2 text-[7px] md:text-[10px] pointer-events-none
-                                        bg-gray-400/10 text-gray-600`
-                                    }>
-                                        <div className="w-3 md:w-4 h-1 md:h-2 rounded-sm" style={{ backgroundColor: line.color }}></div>
-                                        {name}
-                                    </div>
-                                )
-                            }
-                            return null;
-                        })
+                        if (name) {
+                            return (
+                                <div key={line.color} className={
+                                    `p-1 rounded-md
+                                    flex items-center gap-2 text-[7px] md:text-[10px] pointer-events-none
+                                    bg-gray-400/10 text-gray-600`
+                                }>
+                                    <div className="w-3 md:w-4 h-1 md:h-2 rounded-sm" style={{ backgroundColor: line.color }}></div>
+                                    {name}
+                                </div>
+                            )
+                        }
+                        return null;
+                    })
                 }
             </div>
             <footer className={
