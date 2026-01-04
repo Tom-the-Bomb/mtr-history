@@ -117,10 +117,9 @@ export function setupHoverEffect(svgDoc: Document, el: HTMLElement): HTMLElement
         circle.setAttribute('r', '3');
 
         for (const attr of el.attributes) {
-            if (['x', 'y', 'xlink:href', 'href'].includes(attr.name)) {
-                continue;
+            if (!['x', 'y', 'xlink:href', 'href'].includes(attr.name)) {
+                circle.setAttribute(attr.name, attr.value);
             }
-            circle.setAttribute(attr.name, attr.value);
         }
         circle.style.fill = '#fff';
         circle.style.stroke = '#000';
@@ -167,10 +166,9 @@ export function setupHoverEffect(svgDoc: Document, el: HTMLElement): HTMLElement
         rect.setAttribute('rx', String(rx));
 
         for (const attr of el.attributes) {
-            if (['x', 'y', 'xlink:href', 'href'].includes(attr.name)) {
-                continue;
+            if (!['x', 'y', 'xlink:href', 'href'].includes(attr.name)) {
+                rect.setAttribute(attr.name, attr.value);
             }
-            rect.setAttribute(attr.name, attr.value);
         }
         rect.style.fill = '#fff';
         rect.style.stroke = '#000';
