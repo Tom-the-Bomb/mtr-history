@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import mtrLogo from '../assets/mtr.svg';
 import crossPlatform from '../assets/crossplatform.webp';
 import railProperty from '../assets/railproperty.jpg';
@@ -12,14 +14,18 @@ function Link({ href, children }: { href: string, children: React.ReactNode }) {
     );
 }
 
-export default function Article({ setRenderArticle }: { setRenderArticle: (value: boolean) => void }) {
+export default function Article() {
+    useEffect(() => {
+        document.body.style.overflow = 'auto';
+    }, []);
+
     return (
         <div className="max-w-dvw min-h-dvh flex flex-col">
             <header>
-                <nav className="p-3" aria-label="Article navigation">
-                    <button type="button" className="nav-btn" onClick={() => setRenderArticle(false)}>
+                <nav className="py-4 px-3" aria-label="Article navigation">
+                    <RouterLink to="/" className="nav-btn py-1.5!">
                         Return to Map
-                    </button>
+                    </RouterLink>
                 </nav>
             </header>
             <main className="grow">

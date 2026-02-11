@@ -6,6 +6,7 @@ import {
     useMemo,
     useRef,
 } from 'react'
+import { Link } from 'react-router-dom'
 
 import {
     type LineWrapper,
@@ -89,7 +90,11 @@ function renderTooltip(
     return null;
 }
 
-export default function Map({ setRenderArticle }: { setRenderArticle: (value: boolean) => void }) {
+export default function Map() {
+    useEffect(() => {
+        document.body.style.overflow = 'hidden';
+    }, []);
+
     const svgRef = useRef<HTMLObjectElement | null>(null);
     const linesRef = useRef<LineWrapper[]>([]);
     const stationsRef = useRef<StationWrapper[]>([]);
@@ -364,13 +369,12 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
                 </div>
                 <div className="flex flex-col gap-5 justify-center items-center">
                     <h3 className="text-sm font-normal text-shadow-xl opacity-70">Explore the historical development of Hong Kong's MTR system</h3>
-                    <button
-                        type="button"
+                    <Link
+                        to="/article"
                         className="pointer-events-auto nav-btn"
-                        onClick={() => setRenderArticle(true)}
                     >
                         Read more
-                    </button>
+                    </Link>
                 </div>
             </header>
             <main className="w-dvw h-dvh touch-none">
