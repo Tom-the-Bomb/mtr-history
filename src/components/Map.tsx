@@ -355,25 +355,15 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
 
     return (
         <div className="w-dvw h-dvh flex justify-center items-center touch-none">
-            <main className="w-dvw h-dvh touch-none">
-                <object
-                    ref={svgRef}
-                    data={mapSvg}
-                    onLoad={() => setSvgLoaded(true)}
-                    type="image/svg+xml"
-                    className="absolute top-0 left-0 w-full h-full touch-none"
-                />
-                {svgLoaded && renderTooltip(stations, tooltip, time)}
-            </main>
             <header className={
-                `absolute top-0 left-0 w-dvw pt-15 flex flex-col justify-center items-center gap-3 text-center pointer-events-none`
+                `absolute top-0 left-0 w-dvw pt-15 flex flex-col justify-center items-center gap-3 text-center pointer-events-none z-10`
             }>
                 <div>
                     <h1 className="text-5xl font-bold font-serif text-shadow-xl">MTR History</h1>
-                    <h2 className="text-2xl font-zh">港铁历史</h2>
+                    <h2 className="text-2xl font-zh" lang="zh-Hans">港铁历史</h2>
                 </div>
                 <div className="flex flex-col gap-5 justify-center items-center">
-                    <h2 className="text-sm text-shadow-xl opacity-70">Explore the historical development of Hong Kong's MTR system</h2>
+                    <h3 className="text-sm font-normal text-shadow-xl opacity-70">Explore the historical development of Hong Kong's MTR system</h3>
                     <button
                         type="button"
                         className="pointer-events-auto nav-btn"
@@ -383,6 +373,17 @@ export default function Map({ setRenderArticle }: { setRenderArticle: (value: bo
                     </button>
                 </div>
             </header>
+            <main className="w-dvw h-dvh touch-none">
+                <object
+                    ref={svgRef}
+                    data={mapSvg}
+                    onLoad={() => setSvgLoaded(true)}
+                    type="image/svg+xml"
+                    aria-label="Interactive map of Hong Kong's MTR railway network showing historical development from 1972 to 2023"
+                    className="absolute top-0 left-0 w-full h-full touch-none"
+                />
+                {svgLoaded && renderTooltip(stations, tooltip, time)}
+            </main>
             <div className="absolute bottom-31 left-4 flex flex-col gap-2 pointer-events-auto">
                 <button
                     type="button"

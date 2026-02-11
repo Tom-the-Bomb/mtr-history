@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mtr.tomthebomb.dev/sitemap.xml
