@@ -1,85 +1,137 @@
 import * as d3 from 'd3';
 
-import {
-    type LineWrapper,
-    type StationWrapper,
-} from './schemas';
+import { type LegendWrapper, type LineWrapper, type StationWrapper } from './schemas';
 
-import {
-    findName,
-    TUEN_MA_OPENING_DATE,
-} from './utils';
+import { findName, isActive } from './utils';
 
-export function update(dateNum: number, lines: LineWrapper[], stations: StationWrapper[]): void {
-    for (const { el, dateRange: { appear, removed } } of lines) {
-        if (appear.getTime() <= dateNum && dateNum <= removed.getTime()) {
-            if (el.id.startsWith('west_rail_')) {
-                el.style.stroke = dateNum > TUEN_MA_OPENING_DATE
-                    ? 'rgb(146,48,17)'
-                    : 'rgb(163,35,143)';
+export const MAP_TRANSITION_MS = 650;
+
+const DIM_SATURATION = 0.2;
+const DIM_OPACITY = '0.25';
+const DIM_TRANSITION = 'stroke 0.2s, stroke-opacity 0.2s, fill-opacity 0.2s';
+
+const dimColorsCache = new Map<string, string>();
+
+function desaturate(color: string): string {
+    let dimColor = dimColorsCache.get(color);
+    if (!dimColor) {
+        const { r, g, b } = d3.rgb(color);
+
+        // weighted avg for grayscale from CSS spec
+        const grey = 0.213 * r + 0.715 * g + 0.072 * b;
+        const mix = (c: number) => grey + DIM_SATURATION * (c - grey);
+
+        dimColor = d3.rgb(mix(r), mix(g), mix(b)).formatRgb();
+        dimColorsCache.set(color, dimColor);
+    }
+    return dimColor;
+}
+
+function setDimmed(el: SVGElement, dimmed: boolean, fade: boolean): void {
+    const opacity = dimmed ? DIM_OPACITY : '';
+    if (el.style.strokeOpacity === opacity) return;
+
+    el.style.transition = fade ? DIM_TRANSITION : '';
+    if (fade) {
+        el.addEventListener('transitionend', () => (el.style.transition = ''), { once: true });
+    }
+    el.style.strokeOpacity = el.style.fillOpacity = opacity;
+}
+
+export function update(
+    dateNum: number,
+    lines: LineWrapper[],
+    stations: StationWrapper[],
+    legend: LegendWrapper[],
+    highlight: string[] = [],
+): void {
+    const colors = new Map(legend.map(({ color, states }) => [findName(states, dateNum), color]));
+
+    const lit = new Set(
+        legend
+            .filter(({ id }) => highlight.includes(id))
+            .map(({ states }) => findName(states, dateNum))
+            .filter(name => name !== null),
+    );
+
+    for (const { el, states, length, dashArray } of lines) {
+        const name = findName(states, dateNum);
+
+        if (name !== null) {
+            const dimmed = lit.size > 0 && !lit.has(name);
+
+            const color = colors.get(name);
+            if (color) {
+                el.style.stroke = dimmed ? desaturate(color) : color;
             }
+            setDimmed(el, dimmed, el.dataset.hidden === 'false');
 
             if (el.style.strokeDashoffset !== '0') {
+                el.dataset.hidden = 'false';
+
                 const selection = d3.select(el);
 
-                if (el.id === 'airportexpress_shared_section') {
-                    selection.style('stroke-dasharray', '6, 6');
+                if (dashArray !== 'none') {
+                    selection.style('stroke-dasharray', dashArray);
                 }
 
                 selection
                     .transition()
-                    .duration(500)
+                    .duration(MAP_TRANSITION_MS)
                     .ease(d3.easeLinear)
                     .style('stroke-dashoffset', '0');
-
-                el.dataset.shrinking = 'false';
             }
-        } else {
-            const length = el.getTotalLength().toString();
+        } else if (el.dataset.hidden !== 'true') {
+            el.dataset.hidden = 'true';
 
-            if (el.style.strokeDashoffset !== length || el.style.strokeDasharray !== length) {
-                if (el.dataset.shrinking !== 'true') {
-                    el.dataset.shrinking = 'true';
-                    d3.select(el)
-                        .transition()
-                        .duration(500)
-                        .ease(d3.easeLinear)
-                        .style('stroke-dashoffset', length)
-                        .style('stroke-dasharray', length)
-                        .on('end', () => {
-                            el.dataset.shrinking = 'false';
-                        });
-                }
-            }
+            d3.select(el)
+                .transition()
+                .duration(MAP_TRANSITION_MS)
+                .ease(d3.easeLinear)
+                .style('stroke-dashoffset', String(length))
+                .style('stroke-dasharray', String(length));
         }
     }
 
-    for (const { el, states } of stations) {
+    for (const { el, states, lines } of stations) {
         if (findName(states, dateNum) !== null) {
+            const dimmed =
+                lit.size > 0 &&
+                !lines.some(
+                    ({ name: id, dateRange }) =>
+                        highlight.includes(id) && isActive(dateRange, dateNum),
+                );
+            setDimmed(el, dimmed, el.style.opacity === '1');
+
+            el.style.pointerEvents = '';
             if (el.style.opacity !== '1') {
                 d3.select(el)
                     .transition('appear')
-                    .duration(500)
+                    .duration(MAP_TRANSITION_MS)
                     .ease(d3.easeLinear)
-                    .style('opacity', '1')
+                    .style('opacity', '1');
             }
         } else {
+            el.style.pointerEvents = 'none';
             if (el.style.opacity !== '0') {
                 d3.select(el)
                     .transition('disappear')
-                    .duration(500)
+                    .duration(MAP_TRANSITION_MS)
                     .ease(d3.easeLinear)
-                    .style('opacity', '0')
+                    .style('opacity', '0');
             }
         }
     }
 }
 
-export function hoverMouseEnter(
+function hoverMouseEnter(
     rect: Element,
-    currentX: number, currentY: number,
-    width: number, height: number,
-    rx: number, scaleFactor: number,
+    currentX: number,
+    currentY: number,
+    width: number,
+    height: number,
+    rx: number,
+    scaleFactor: number,
 ): void {
     d3.select(rect)
         .transition('hoverEffect')
@@ -91,10 +143,13 @@ export function hoverMouseEnter(
         .attr('rx', String(rx * scaleFactor));
 }
 
-export function hoverMouseLeave(rect: Element,
-    currentX: number, currentY: number,
-    width: number, height: number,
-    rx: number
+function hoverMouseLeave(
+    rect: Element,
+    currentX: number,
+    currentY: number,
+    width: number,
+    height: number,
+    rx: number,
 ): void {
     d3.select(rect)
         .transition('hoverEffect')
@@ -106,83 +161,31 @@ export function hoverMouseLeave(rect: Element,
         .attr('rx', String(rx));
 }
 
-export function setupHoverEffect(svgDoc: Document, el: HTMLElement): HTMLElement {
-    const href = el.getAttribute('xlink:href');
+export function setupHoverEffect(el: SVGElement): void {
+    const SCALE_FACTOR = 5 / 3;
 
-    if (el.localName === 'use' && href === '#station') {
-        const circle = svgDoc.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    if (el.localName === 'circle') {
+        const r = parseFloat(el.getAttribute('r')!);
 
-        circle.setAttribute('cx', el.getAttribute('x')!);
-        circle.setAttribute('cy', el.getAttribute('y')!);
-        circle.setAttribute('r', '3');
-
-        for (const attr of el.attributes) {
-            if (!['x', 'y', 'xlink:href', 'href'].includes(attr.name)) {
-                circle.setAttribute(attr.name, attr.value);
-            }
-        }
-        circle.style.fill = '#fff';
-        circle.style.stroke = '#000';
-        circle.style.strokeWidth = '1';
-
-        el.parentNode!.replaceChild(circle, el);
-
-        d3.select(circle)
-            .on('mouseenter.a', () => {
-                d3.select(circle)
+        d3.select(el)
+            .on('mouseenter', () => {
+                d3.select(el)
                     .transition('hoverEffect')
                     .duration(300)
-                    .attr('r', '5');
+                    .attr('r', String(r * SCALE_FACTOR));
             })
-            .on('mouseleave.a', () => {
-                d3.select(circle)
-                    .transition('hoverEffect')
-                    .duration(300)
-                    .attr('r', '3');
+            .on('mouseleave', () => {
+                d3.select(el).transition('hoverEffect').duration(300).attr('r', String(r));
             });
+    } else if (el.localName === 'rect') {
+        const x = parseFloat(el.getAttribute('x') || '0');
+        const y = parseFloat(el.getAttribute('y') || '0');
+        const width = parseFloat(el.getAttribute('width') || '0');
+        const height = parseFloat(el.getAttribute('height') || '0');
+        const rx = parseFloat(el.getAttribute('rx') || '0');
 
-        return circle as unknown as HTMLElement;
+        d3.select(el)
+            .on('mouseenter', () => hoverMouseEnter(el, x, y, width, height, rx, SCALE_FACTOR))
+            .on('mouseleave', () => hoverMouseLeave(el, x, y, width, height, rx));
     }
-
-    if (el.localName === 'use' && href === '#interchange') {
-        const rect = svgDoc.createElementNS('http://www.w3.org/2000/svg', 'rect');
-
-        const useX = parseFloat(el.getAttribute('x') || '0');
-        const useY = parseFloat(el.getAttribute('y') || '0');
-
-        const width = 6;
-        const height = 10;
-        const rx = 3.5;
-        const defX = -3;
-        const defY = -5;
-
-        const currentX = useX + defX;
-        const currentY = useY + defY;
-
-        rect.setAttribute('x', String(currentX));
-        rect.setAttribute('y', String(currentY));
-        rect.setAttribute('width', String(width));
-        rect.setAttribute('height', String(height));
-        rect.setAttribute('rx', String(rx));
-
-        for (const attr of el.attributes) {
-            if (!['x', 'y', 'xlink:href', 'href'].includes(attr.name)) {
-                rect.setAttribute(attr.name, attr.value);
-            }
-        }
-        rect.style.fill = '#fff';
-        rect.style.stroke = '#000';
-        rect.style.strokeWidth = '1';
-
-        el.parentNode!.replaceChild(rect, el);
-
-        const scaleFactor = 5 / 3;
-
-        d3.select(rect)
-            .on('mouseenter', () => hoverMouseEnter(rect as Element, currentX, currentY, width, height, rx, scaleFactor))
-            .on('mouseleave', () => hoverMouseLeave(rect as Element, currentX, currentY, width, height, rx));
-
-        return rect as unknown as HTMLElement;
-    }
-    return el;
 }
